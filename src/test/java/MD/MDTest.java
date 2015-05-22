@@ -9,6 +9,8 @@ public class MDTest {
 	@Test
 	public void MD() {
 		System.out.print(MD5.GetMD5Code("12345678"));
-	}
+		
+		
+	} 
 
 }
