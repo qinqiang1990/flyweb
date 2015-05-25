@@ -8,7 +8,7 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Test;*/
 
-public class Jettytest {
+public class JettyTest {
 	
 	public static final int PORT = 9090;
 	 
