@@ -28,7 +28,7 @@ public class JettyTest {
 		context.setWar(DEFAULT_WEBAPP_PATH);
 
 		
-	    Connector connector = new SelectChannelConnector();  
+	/*    Connector connector = new SelectChannelConnector();  
         connector.setPort(8080);  
         server.setConnectors(new Connector[] { connector });  
         WebAppContext context = new WebAppContext("E:\\workspace\\demo", "/demo");  
@@ -36,7 +36,7 @@ public class JettyTest {
         server.setStopAtShutdown(true);  
         server.setSendServerVersion(true); 
         
-        
+        */
 		server.setHandler(context);
 
 		server.start();
