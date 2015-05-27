@@ -1,38 +1,46 @@
 package jetty;
 
-/*import java.lang.reflect.Field;
-
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.junit.Test;*/
+
+/*import java.lang.reflect.Field;
+
+ import org.eclipse.jetty.server.Connector;
+ import org.eclipse.jetty.server.Server;
+ import org.eclipse.jetty.server.nio.SelectChannelConnector;
+ import org.eclipse.jetty.webapp.WebAppContext;
+ import org.junit.Test;*/
 
 public class JettyTest {
-	
-	public static final int PORT = 9090;
-	 
-	public static void main(String[] args) {
-		
-		
-/*		// TODO Auto-generated method stub
-		String name=Class.class.getClass().getResource("/").getPath();
-		
-		Server server = new Server();
-		// 设置在JVM退出时关闭Jetty的钩子。
-		server.setStopAtShutdown(true);
 
-		SelectChannelConnector connector = new SelectChannelConnector();
-		connector.setPort(port);
-		// 解决Windows下重复启动Jetty居然不报告端口冲突的问题.
-		connector.setReuseAddress(false);
-		server.setConnectors(new Connector[] { connector });
+	private static final int PORT = 19090;
+	private static final String DEFAULT_WEBAPP_PATH = "target/flyweb.war";
 
-		WebAppContext webContext = new WebAppContext(DEFAULT_WEBAPP_PATH, contextPath);
-		// 修改webdefault.xml，解决Windows下Jetty Lock住静态文件的问题.
-		webContext.setDefaultsDescriptor(WINDOWS_WEBDEFAULT_PATH);
-		server.setHandler(webContext);
-		System.out.print(name);*/
+	private static final String DEFAULT_CONTEXT_PATH = "/";
+
+	public static void main(String[] args) throws Exception {
+
+		Server server = new Server(PORT);
+		WebAppContext context = new WebAppContext();
+		context.setContextPath(DEFAULT_CONTEXT_PATH);
+		context.setWar(DEFAULT_WEBAPP_PATH);
+
+		
+	    Connector connector = new SelectChannelConnector();  
+        connector.setPort(8080);  
+        server.setConnectors(new Connector[] { connector });  
+        WebAppContext context = new WebAppContext("E:\\workspace\\demo", "/demo");  
+        server.addHandler(context);  
+        server.setStopAtShutdown(true);  
+        server.setSendServerVersion(true); 
+        
+        
+		server.setHandler(context);
+
+		server.start();
+		server.join();
 	}
-
 }
+
