@@ -18,22 +18,32 @@
 	</properties>
 
 
+
 	<dependencies>
-	   
-        <!-- Jetty -->  
-        <dependency>  
-            <groupId>org.eclipse.jetty.aggregate</groupId>  
-            <artifactId>jetty-all</artifactId>  
-            <version>${jetty.version}</version>  
-        </dependency>  
   
-        <!-- Jetty Webapp -->  
-        <dependency>  
-            <groupId>org.eclipse.jetty</groupId>  
-            <artifactId>jetty-webapp</artifactId>  
-            <version>${jetty.version}</version>  
-        </dependency>  
-        
+		<dependency>
+			<groupId>jdk.tools</groupId>
+			<artifactId>jdk.tools</artifactId>
+			<version>1.6</version>
+			<scope>system</scope>
+			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+		</dependency>
+
+
+		<!-- Jetty -->
+		<dependency>
+			<groupId>org.eclipse.jetty.aggregate</groupId>
+			<artifactId>jetty-all</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<!-- Jetty Webapp -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -93,11 +103,11 @@
 					<!-- 每2秒的间隔扫描一次,实现热部署 -->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<connectors>
-                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                         <port>9090</port>
-                         <maxIdleTime>60000</maxIdleTime>
-                         </connector>
-                    </connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>9090</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
 				</configuration>
 			</plugin>
 		</plugins>

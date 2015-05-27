@@ -3,7 +3,9 @@ package jetty;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.junit.Test;
 
 /*import java.lang.reflect.Field;
 
@@ -15,32 +17,34 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class JettyTest {
 
-	private static final int PORT = 19090;
-	private static final String DEFAULT_WEBAPP_PATH = "target/flyweb.war";
+	private final int PORT = 9090;
 
-	private static final String DEFAULT_CONTEXT_PATH = "/";
+	private final String DEFAULT_WEBAPP_PATH = "src/main/webapp";
 
-	public static void main(String[] args) throws Exception {
+	private final String DEFAULT_CONTEXT_PATH = "/flyweb";
+
+	private final String DEFAULT_WEBDEFAULTXML_PATH = "src/main/webapp/WEB-INF/webdefault.xml";
+
+	private final String DEFAULT_WEBXML_PATH = "src/main/webapp/WEB-INF/web.xml";
+
+	@Test
+	public void start() throws Exception {
 
 		Server server = new Server(PORT);
+//war
 		WebAppContext context = new WebAppContext();
 		context.setContextPath(DEFAULT_CONTEXT_PATH);
-		context.setWar(DEFAULT_WEBAPP_PATH);
-
+		context.setResourceBase(DEFAULT_WEBAPP_PATH);
+		context.setDefaultsDescriptor(DEFAULT_WEBDEFAULTXML_PATH);
+		context.setDescriptor(DEFAULT_WEBXML_PATH);
 		
-	/*    Connector connector = new SelectChannelConnector();  
-        connector.setPort(8080);  
-        server.setConnectors(new Connector[] { connector });  
-        WebAppContext context = new WebAppContext("E:\\workspace\\demo", "/demo");  
-        server.addHandler(context);  
-        server.setStopAtShutdown(true);  
-        server.setSendServerVersion(true); 
-        
-        */
+		WebAppClassLoader classLoader = new WebAppClassLoader(context);
+		classLoader.addClassPath("target/classes");
+		context.setClassLoader(classLoader);
+
 		server.setHandler(context);
 
 		server.start();
 		server.join();
 	}
 }
-
