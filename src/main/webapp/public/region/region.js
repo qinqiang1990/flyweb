@@ -67,7 +67,8 @@ Region.prototype.init_city = function(ProID) {
 
 			});
 		}
-		alert(data);
+	 
+		 
 		// 排序
 		data.sort(function(a, b) {
 			return a.CitySort - b.CitySort;
