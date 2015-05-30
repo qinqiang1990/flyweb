@@ -141,7 +141,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>${build.finalName}</finalName>
+		<!-- <finalName>${build.finalName}</finalName> -->
 		<plugins>
 			<!-- Maven Jetty Plugin -->
 			<plugin>
@@ -150,10 +150,10 @@
 				<version>${jetty.plugin}</version>
 				<configuration>
 					<!-- 每2秒的间隔扫描一次,实现热部署 -->
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>9090</port>
+							<port>8080</port>
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
 					</connectors>
