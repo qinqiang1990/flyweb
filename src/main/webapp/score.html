@@ -1,0 +1,60 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>underscore</title>
+<style>
+.holder {
+	height: 1000px;
+}
+
+.content2 {
+	padding: 20px;
+}
+
+.content2 .inner {
+	position: relative;
+	background: #fff;
+}
+
+.close-btn {
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	width: 20px;
+	height: 20px;
+	background-color: #ddd;
+	color: #fff;
+	cursor: pointer;
+	text-align: center;
+}
+</style>
+
+ 
+<script src="public/jquery/jquery-1.11.2.min.js"></script>
+<script src="public/underscore/underscore-min.js"></script>
+<script src="public/score.js"></script>
+
+</head>
+
+<body>
+
+	<!-- 定义模板，将模板内容放到一个script标签中 -->
+	<script type="text/template" id="tpl">  
+    [<% for(var i = 0; i < list.length; i++) { %>]  
+        [<% var item = list[i] %>]  
+        <li>  
+            <span>[<%=item.firstName%>] [<%=item.lastName%>]</span>  
+            <span>[<%=item.city%>]</span>  
+        </li>  
+    [<% } %>]  
+</script>
+
+	<a href="javascript:void(0);" id="ttt">click</a>
+	<div id="show"></div>
+
+</body>
+
+</html>
