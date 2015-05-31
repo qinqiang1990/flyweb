@@ -1,5 +1,7 @@
 package qq.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ public class BookService {
 		bookdao.update(book);
 	}
 
-	public String list(Book book) {
+	public List<Book> list(Book book) {
 		// TODO Auto-generated method stub
 		return bookdao.list(book);
 	}

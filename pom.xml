@@ -15,16 +15,36 @@
 		<jetty.plugin>8.1.16.v20140903</jetty.plugin>
 		<build.finalName>flyweb</build.finalName>
 		<jetty.version>8.0.4.v20111024</jetty.version>
-
-
 		<spring.version>4.0.6.RELEASE</spring.version>
-
 		<servlet-api.version>2.5</servlet-api.version>
+		<fastjson.version>1.2.6</fastjson.version>
+		<jackson.version>2.1.0</jackson.version>
 	</properties>
 
 	<dependencies>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -165,7 +185,17 @@
 
 				</configuration>
 			</plugin>
+
+
+			<!-- resources插件 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
+				</plugin> -->
+
 		</plugins>
 	</build>
 
+	<!-- <profiles> <profile> <id>development</id> <activation> <activeByDefault>true</activeByDefault> 
+		</activation> <build> <resources> <resource> <directory>src/main/resources</directory> 
+		<filtering>true</filtering> </resource> </resources> </build> </profile> 
+		</profiles> -->
 </project>

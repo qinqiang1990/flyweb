@@ -1,10 +1,11 @@
 package qq.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import qq.spring.model.Book;
@@ -32,7 +33,7 @@ public class BookController {
 
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public String list(Book book) {
+	public List<Book> list(Book book) {
 		return bookservice.list(book);
 	}
 }
