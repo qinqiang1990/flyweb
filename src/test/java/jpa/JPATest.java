@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class JPATest {
 
-	@Test
+	 
 	public void save() {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("JPAPU");
@@ -26,7 +26,7 @@ public class JPATest {
 		factory.close();
 	}
 
-	@Test
+	 
 	public void get() {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("JPAPU");
@@ -42,7 +42,7 @@ public class JPATest {
 
 	// 1.事务关联
 	// 2.托管状态
-	@Test
+ 
 	public void update() {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("JPAPU");
@@ -59,7 +59,7 @@ public class JPATest {
 		 */
 	}
 
-	@Test
+ 
 	public void update2() {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("JPAPU");
@@ -78,7 +78,7 @@ public class JPATest {
 		 */
 	}
 
-	@Test
+	 
 	public void getReference() {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("JPAPU");
