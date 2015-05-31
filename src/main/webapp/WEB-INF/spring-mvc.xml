@@ -9,34 +9,29 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
-			 
-				<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
-				  <bean
-					class="org.springframework.http.converter.StringHttpMessageConverter">
-					<constructor-arg value="UTF-8" />
-				</bean> 
-				<!-- fastjson序列化 -->
-				<!-- <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                	<property name="supportedMediaTypes">
-                    	<list>
-                        	<value>text/html;charset=UTF-8</value>
-                        	<value>application/json;charset=UTF-8</value>
-                    	</list>
-                	</property>
-            	</bean> -->
-       
-				<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
-				 
-			 	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <value>text/html; charset=UTF-8</value>
-                            <value>application/json;charset=UTF-8</value>
-                        </list>
-                    </property>
-                </bean>
-			 
-			 
+
+			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+			<!-- fastjson序列化 -->
+			<!-- <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"> 
+				<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
+				<value>application/json;charset=UTF-8</value> </list> </property> </bean> -->
+
+			<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
+
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+
+
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
@@ -88,4 +83,13 @@
 			</props>
 		</property>
 	</bean>
+
+
+	<!-- 即如果当前路径是/ 则重定向到/admin/index (重定向) -->
+	<mvc:view-controller path="/" view-name="redirect:/admin/index" />
+
+
+	<!-- 如果当前路径是/ 则交给相应的视图解析器直接解析为视图 -->
+	<mvc:view-controller path="/" view-name="admin/index" />
+
 </beans>
