@@ -55,19 +55,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-	
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -139,51 +134,38 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 	</dependencies>
-	
-	<!-- <build>
+
+	<!-- <build> <finalName>${build.finalName}</finalName> <plugins> Maven Jetty 
+		Plugin <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>maven-jetty-plugin</artifactId> 
+		<version>6.1.22</version> <configuration> 每2秒的间隔扫描一次,实现热部署 <scanIntervalSeconds>2</scanIntervalSeconds> 
+		<connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector"> 
+		<port>8080</port> <maxIdleTime>60000</maxIdleTime> </connector> </connectors> 
+		</configuration> </plugin> </plugins> </build> -->
+
+
+
+	<build>
 		<finalName>${build.finalName}</finalName>
 		<plugins>
-			Maven Jetty Plugin
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.22</version>
-				<configuration>
-					每2秒的间隔扫描一次,实现热部署
-					<scanIntervalSeconds>2</scanIntervalSeconds>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8080</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build> -->
-	
-	
-	 
-	 <build>
-		<finalName>${build.finalName}</finalName>
-		<plugins>
-			
+
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.plugin}</version>
 				<configuration>
 					<!-- 每2秒的间隔扫描一次,实现热部署 -->
-					<scanIntervalSeconds>2</scanIntervalSeconds>
-					<connectors>					
+					<!-- <scanIntervalSeconds>2</scanIntervalSeconds> -->
+					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>8080</port>
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
 					</connectors>
+
+
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	 
+
 </project>

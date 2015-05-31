@@ -10,7 +10,8 @@
   <!-- A context may be assigned a default descriptor by:                    -->
   <!--  + Calling WebApplicationContext.setDefaultsDescriptor                -->
   <!--  + Passed an arg to addWebApplications                                -->
-  <!--                                                                       -->
+  <!-- webdefault.xml
+                                                                        -->
   <!-- This file is used both as the resource within the jetty.jar (which is -->
   <!-- used as the default if no explicit defaults descriptor is set) and it -->
   <!-- is copied to the etc directory of the Jetty distro and explicitly     -->
