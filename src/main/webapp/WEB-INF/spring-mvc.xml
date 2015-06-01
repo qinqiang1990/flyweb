@@ -30,16 +30,15 @@
 					</list>
 				</property>
 			</bean>
-
-
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-
+	
 
 	<!-- 注解扫描包 -->
 	<context:component-scan base-package="qq.spring"></context:component-scan>
-
+	<context:component-scan base-package="qq.security"></context:component-scan>
+	
 	<!-- <context:annotation-config /> -->
 
 	<!-- ViewResolver -->

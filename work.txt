@@ -9,3 +9,32 @@
 5.velocity tool.xml	静态化
 
 6.jquery tooltips
+
+7.http://dl2.iteye.com/upload/attachment/0045/1685/9623b0f6-7c1f-31f2-a9c2-162247a43283.pdf
+
+spring security maven
+
+
+    <!-- 测试用户 -->  
+        <security:authentication-manager>  
+            <security:authentication-provider>  
+                <security:user-service>  
+                    <security:user name="jimi" password="jimispassword"  
+                        authorities="ROLE_USER, ROLE_ADMIN" />  
+                    <security:user name="bob" password="bobspassword"  
+                        authorities="ROLE_USER" />  
+                </security:user-service>  
+            </security:authentication-provider>  
+        </security:authentication-manager>  
+      
+        <security:http auto-config='true'>  
+            <security:intercept-url pattern="/login.jsp*"  
+                access="IS_AUTHENTICATED_ANONYMOUSLY" />  
+            <security:intercept-url pattern="/**" access="ROLE_USER" />  
+            <security:form-login />  
+        </security:http>  
+        
+        
+http://liukai.iteye.com/blog/982088
+
+http://sarin.iteye.com/blog/830831
