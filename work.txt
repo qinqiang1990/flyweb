@@ -1,4 +1,4 @@
-1.security
+1.security @Secured mavicat 
 
 2.shrio
 
@@ -38,3 +38,8 @@ spring security maven
 http://liukai.iteye.com/blog/982088
 
 http://sarin.iteye.com/blog/830831
+
+
+java spring 缓存
+
+自定义注解
