@@ -11,7 +11,7 @@ import qq.security.model.DBUser;
 @Repository
 public class UserDao {
 
-	protected static Logger logger = Logger.getLogger("DBUserDao");
+	protected static Logger logger = Logger.getLogger("UserDao");
 
 	public DBUser getDatabase(String username) {
 

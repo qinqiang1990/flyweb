@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import qq.security.dao.DBUserDao;
+import qq.security.dao.UserDao;
 import qq.security.model.DBUser;
 
 @Service
@@ -22,7 +23,7 @@ import qq.security.model.DBUser;
 public class DBUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private DBUserDao userDao;
+	private UserDao userDao;
 
 	public UserDetails loadUserByUsername(String login)
 			throws UsernameNotFoundException {
