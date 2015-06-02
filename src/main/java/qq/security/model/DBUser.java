@@ -1,6 +1,6 @@
 package qq.security.model;
 
-public class DbUser {
+public class DBUser {
 
 	private String username;
 	private String password;

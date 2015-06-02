@@ -6,18 +6,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import qq.security.model.DbUser;
+import qq.security.model.DBUser; 
 
 @Repository
-public class DBUserDao {
+public class UserDao {
 
 	protected static Logger logger = Logger.getLogger("DBUserDao");
 
-	public DbUser getDatabase(String username) {
+	public DBUser getDatabase(String username) {
 
-		List<DbUser> users = internalDatabase();
+		List<DBUser> users = internalDatabase();
 
-		for (DbUser dbUser : users) {
+		for (DBUser dbUser : users) {
 			if (dbUser.getUsername().equals(username) == true) {
 				logger.debug("User found");
 				return dbUser;
@@ -31,12 +31,12 @@ public class DBUserDao {
 	/**
 	 * 初始化数据
 	 */
-	private List<DbUser> internalDatabase() {
+	private List<DBUser> internalDatabase() {
 
-		List<DbUser> users = new ArrayList<DbUser>();
-		DbUser user = null;
+		List<DBUser> users = new ArrayList<DBUser>();
+		DBUser user = null;
 
-		user = new DbUser();
+		user = new DBUser();
 		user.setUsername("admin");
 
 		// "admin"经过MD5加密后
@@ -45,7 +45,7 @@ public class DBUserDao {
 
 		users.add(user);
 
-		user = new DbUser();
+		user = new DBUser();
 		user.setUsername("user");
 
 		// "user"经过MD5加密后

@@ -14,7 +14,8 @@
 
 	<h1>Login</h1>
 
-	<div id="login-error">${error}</div>
+	<div id="login-error">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
+	</div>
 
 	<form action="../j_spring_security_check" method="post">
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -15,9 +17,16 @@
 				<constructor-arg value="UTF-8" />
 			</bean>
 			<!-- fastjson序列化 -->
-			<!-- <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"> 
-				<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
-				<value>application/json;charset=UTF-8</value> </list> </property> </bean> -->
+			<!-- <bean
+				id="fastJsonHttpMessageConverter"
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean> -->
 
 			<!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
 
@@ -44,37 +53,73 @@
 	<!-- ViewResolver -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
+		<property
+			name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+		<property
+			name="prefix"
+			value="/WEB-INF/jsp/" />
+		<property
+			name="suffix"
+			value=".jsp" />
 	</bean>
 
 	<!-- 拦截匹配的URL -->
-	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/user/*" /> 
-		/user/* <bean class="com.mvc.MyInteceptor"></bean> </mvc:interceptor> </mvc:interceptors> -->
+<!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/*" />
+			/user/*
+			<bean class="com.mvc.MyInteceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> 
+-->
 
 
 
 	<!-- 拦截所有url -->
-	<!-- <mvc:interceptors> <bean class="org.aop.LoginInteceptor" /> </mvc:interceptors> -->
+<!--
+	<mvc:interceptors>
+		<bean class="org.aop.LoginInteceptor" />
+	</mvc:interceptors> 
+-->
 
 
 
 	<!-- 不进行拦截的 -->
 	<mvc:default-servlet-handler />
-	<!-- <mvc:resources location="/" mapping="/**/*.html" cache-period="31556926"/> 
-		<mvc:resources location="/images/" mapping="/images/**" cache-period="31556926"/> 
-		<mvc:resources location="/img/" mapping="/img/**" cache-period="31556926"/> 
-		<mvc:resources location="/download/" mapping="/download/**" cache-period="31556926"/> 
-		<mvc:resources location="/js/" mapping="/js/**" cache-period="31556926"/> 
-		<mvc:resources location="/css/" mapping="/css/**" cache-period="31556926" 
-		/> <mvc:resources location="/public/" mapping="/public/**" cache-period="31556926" 
-		/> -->
+<!-- 	<mvc:resources
+		location="/"
+		mapping="/**/*.html"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/images/"
+		mapping="/images/**"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/img/"
+		mapping="/img/**"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/download/"
+		mapping="/download/**"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/js/"
+		mapping="/js/**"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/css/"
+		mapping="/css/**"
+		cache-period="31556926" />
+	<mvc:resources
+		location="/public/"
+		mapping="/public/**"
+		cache-period="31556926" /> -->
 
 
 	<!--配置全局的异常 -->
-	<bean id="exceptionResolver"
+	<bean
+		id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -85,10 +130,14 @@
 
 
 	<!-- 即如果当前路径是/ 则重定向到/admin/index (重定向) -->
-	<mvc:view-controller path="/" view-name="redirect:/admin/index" />
+	<mvc:view-controller
+		path="/"
+		view-name="redirect:/admin/index" />
 
 
 	<!-- 如果当前路径是/ 则交给相应的视图解析器直接解析为视图 -->
-	<mvc:view-controller path="/" view-name="admin/index" />
+	<mvc:view-controller
+		path="/"
+		view-name="admin/index" />
 
 </beans>
