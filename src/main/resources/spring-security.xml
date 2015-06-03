@@ -92,7 +92,7 @@
 		</security:authentication-manager>
 
 	-->
-	
+
 	<!-- 对密码进行MD5编码 -->
 	<bean
 		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"
@@ -102,8 +102,8 @@
 	<bean
 		id="dbUserService"
 		class="qq.security.service.DBUserDetailsService" />
- 
- 
+
+
 	<!-- 指定一个自定义的authentication-manager :dbUserService -->
 	<security:authentication-manager>
 		<security:authentication-provider
@@ -114,7 +114,7 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	
+
 
 	<!-- 国际化 -->
 	<bean

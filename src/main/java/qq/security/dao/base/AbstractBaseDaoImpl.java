@@ -98,10 +98,10 @@ public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 	public Object queryForProperty(String property, Long entityId) {
 		String jpql = "select o." + property + " from " + entityName
-				+ " o where o." + getEntityId() + "=?";
+				+ " o where o." + getEntityId() + "=:id";
 		System.out.println(jpql);
 		Query query = em.createQuery(jpql);
-		query.setParameter(1, entityId);
+		query.setParameter("id", entityId);
 		Object result = null;
 		try {
 			result = query.getSingleResult();

@@ -8,35 +8,45 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.BaseModel;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role extends BaseModel {
 
-	private String role;
+	private String rolename;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
-	private Set<User> userRoles;
+	private String access;
 
-	public String getRole() {
-		return role;
+	private Set<User> users;
+
+	public String getRolename() {
+		return rolename;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
 	}
 
-	public Set<User> getUserRoles() {
-		return userRoles;
+	public String getAccess() {
+		return access;
 	}
 
-	public void setUserRoles(Set<User> userRoles) {
-		this.userRoles = userRoles;
+	public void setAccess(String access) {
+		this.access = access;
+	}
+
+	@ManyToMany(mappedBy = "roles")
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

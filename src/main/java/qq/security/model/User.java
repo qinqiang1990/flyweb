@@ -1,27 +1,25 @@
 package qq.security.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import model.BaseModel;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User extends BaseModel {
 
 	private String login;
 
 	private String password;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
-	private Role role;
+	private Set<Role> roles;
 
 	public String getLogin() {
 		return login;
@@ -39,12 +37,14 @@ public class User extends BaseModel {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }

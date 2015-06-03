@@ -1,6 +1,14 @@
 package qq.security.model;
 
-public class DBUser {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import model.BaseModel;
+
+@Entity
+@Table(name = "dbuser")
+
+public class DBUser  extends BaseModel {
 
 	private String username;
 	private String password;
