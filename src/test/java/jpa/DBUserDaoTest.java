@@ -10,7 +10,7 @@ import qq.security.model.DBUser;
 
 public class DBUserDaoTest {
 	DBUserDao dbuserDao = null;
-
+/*
 	@Before
 	public void before() {
 		dbuserDao = new DBUserDaoImpl();
@@ -66,7 +66,7 @@ public class DBUserDaoTest {
 		Assert.assertNotNull(qr);
 		Assert.assertEquals(4, qr.getCount());
 
-	}
+	}*/
 
 	@After
 	public void after() {

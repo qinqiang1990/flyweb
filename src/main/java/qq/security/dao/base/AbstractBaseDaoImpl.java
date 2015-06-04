@@ -94,11 +94,11 @@ public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 	public QueryResult<T> query(String whereSql, Object[] params,
 			LinkedHashMap<String, String> orderBy) {
-		return query(-1, -1, null, null, orderBy);
+		return query(-1, -1, whereSql, params, orderBy);
 	}
 
 	public QueryResult<T> query(String whereSql, Object[] params) {
-		return query(-1, -1, null, null, null);
+		return query(-1, -1, whereSql, params, null);
 	}
 
 	public Object queryForProperty(String property, Long entityId) {

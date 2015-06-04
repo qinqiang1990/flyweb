@@ -3,6 +3,7 @@ package qq.security.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import qq.security.dao.DBUserDao;
 import qq.security.dao.UserDao;
+import qq.security.dao.base.QueryResult;
 import qq.security.model.DBUser;
+import qq.security.model.Role;
 
 public class HBUserDetailsService implements UserDetailsService {
 
@@ -33,16 +36,28 @@ public class HBUserDetailsService implements UserDetailsService {
 		logger.info("loadUserByUsername");
 
 		/* 这里是认证 */
-		DBUser domainUser = userDao.getDatabase(login);
+		// DBUser domainUser = userDao.getDatabase(login);
+		QueryResult<qq.security.model.User> query = userDao.query(" login=?",
+				new Object[] { login });
+		qq.security.model.User domainUser = query.getResults().get(0);
 
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		return new User(domainUser.getUsername(), domainUser.getPassword(),
+		return new User(domainUser.getLogin(), domainUser.getPassword(),
 				enabled, accountNonExpired, credentialsNonExpired,
-				accountNonLocked, getAuthorities(domainUser.getAccess()));
+				accountNonLocked, getAuthorities(domainUser.getRoles()));
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities(Set<Role> set) {
+		/* 这是授权 */
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		for (Role role : set) {
+			authorities.add(new SimpleGrantedAuthority(role.getRolename()));
+		}
+		return authorities;
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities(Integer role) {

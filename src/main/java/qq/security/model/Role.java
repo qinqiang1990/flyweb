@@ -1,5 +1,6 @@
 package qq.security.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class Role extends BaseModel {
 
 	private String access;
 
-	private Set<User> users;
+	private Set<User> users = new HashSet<User>();;
 
 	public String getRolename() {
 		return rolename;
