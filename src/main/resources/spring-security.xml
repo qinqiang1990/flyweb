@@ -9,11 +9,11 @@
                         http://www.springframework.org/schema/security 
                         http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	<!-- Spring-Security 的配置 -->
-	
+
 	<!-- 注意开启use-expressions.表示开启表达式 -->
 
 	<!-- 启用annotation -->
-	
+
 	<!--
 		<global-method-security
 		secured-annotations="enabled"
@@ -21,7 +21,7 @@
 		pre-post-annotations="enabled" />
 
 	-->
-	
+
 	<!--
 		<global-method-security>
 		<protect-pointcut
@@ -42,13 +42,13 @@
 		<access-denied-handler error-page="/error/deny" />
 
 
-		<!-- 
-			default-target-url 指定了从登录页面登录后进行跳转的页面 
-			always-use-default-target true表示登录成功后强制跳转 
-			authentication-failure-url 表示验证失败后进入的页面 
-			login-processing-url 设置验证登录验证地址，如果不设置，默认是j_spring_security_check 
-			username-parameter,password-parameter 设置登录用户名和密码的请求name，默认：j_username,j_password 
-			default-target-url="/user/home" 
+		<!--
+			default-target-url 指定了从登录页面登录后进行跳转的页面
+			always-use-default-target true表示登录成功后强制跳转
+			authentication-failure-url 表示验证失败后进入的页面
+			login-processing-url 设置验证登录验证地址，如果不设置，默认是j_spring_security_check
+			username-parameter,password-parameter 设置登录用户名和密码的请求name，默认：j_username,j_password
+			default-target-url="/user/home"
 		-->
 		<form-login
 			always-use-default-target="true"
@@ -82,25 +82,25 @@
 
 	</http>
 
-<!-- 
-	<authentication-manager>
+	<!--
+		<authentication-manager>
 		<authentication-provider>
-			<password-encoder hash="md5" />
-			<user-service>
-				<user
-					name="user"
-					password="ee11cbb19052e40b07aac0ca060c23ee"
-					authorities="ROLE_USER" />
-				<user
-					name="admin"
-					password="21232f297a57a5a743894a0e4a801fc3"
-					authorities="ROLE_ADMIN" />
-			</user-service>
+		<password-encoder hash="md5" />
+		<user-service>
+		<user
+		name="user"
+		password="ee11cbb19052e40b07aac0ca060c23ee"
+		authorities="ROLE_USER" />
+		<user
+		name="admin"
+		password="21232f297a57a5a743894a0e4a801fc3"
+		authorities="ROLE_ADMIN" />
+		</user-service>
 		</authentication-provider>
 
-	</authentication-manager>
--->
-	
+		</authentication-manager>
+	-->
+
 
 	<!-- 对密码进行MD5编码 -->
 	<beans:bean
@@ -114,67 +114,69 @@
 
 
 	<!-- 指定一个自定义的authentication-manager :dbUserService -->
-<!-- 
-	<authentication-manager>
+	<!--
+		<authentication-manager>
 		<authentication-provider user-service-ref='dbUserService'>
-			<password-encoder ref="passwordEncoder" />
+		<password-encoder ref="passwordEncoder" />
 		</authentication-provider>
-	</authentication-manager>
- -->
+		</authentication-manager>
+	-->
 
-	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="dbUserService" />
+	<authentication-manager>
+		<authentication-provider user-service-ref="dbUserService">
+			<password-encoder hash="md5" />
+		</authentication-provider>
 	</authentication-manager>
 
 	<!-- 国际化 -->
-<!-- 
-	<beans:bean
+	<!--
+		<beans:bean
 		id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 
 		<beans:property
-			name="defaultEncoding"
-			value="utf-8" />
+		name="defaultEncoding"
+		value="utf-8" />
 
 		<beans:property
-			name="basename"
-			value="classpath:org/springframework/security/messages_zh_CN" />
-		
+		name="basename"
+		value="classpath:org/springframework/security/messages_zh_CN" />
+
 		<property
-			name="basename"
-			value=" classpath*:/messages_zh_CN" />
+		name="basename"
+		value=" classpath*:/messages_zh_CN" />
 
-	</beans:bean> 
--->
-
-
+		</beans:bean>
+	-->
 
 
 
-<!-- 
-	<http auto-config="true">
+
+
+	<!--
+		<http auto-config="true">
 
 		<form-login
-			login-page="/login"
-			authentication-success-handler-ref="successHandler"
-			authentication-failure-handler-ref="failureHandler" />
+		login-page="/login"
+		authentication-success-handler-ref="successHandler"
+		authentication-failure-handler-ref="failureHandler" />
 
-	</http>
+		</http>
 
-	登录成功业务处理
-	<beans:bean
+		登录成功业务处理
+		<beans:bean
 		id="successHandler"
 		class="qq.security.service.LoginAuthenticationSuccessHandler">
 		<beans:property
-			name="url"
-			value="/index" />
-	</beans:bean>
-    
-    登录失败业务处理
-	<beans:bean
+		name="url"
+		value="/index" />
+		</beans:bean>
+
+		登录失败业务处理
+		<beans:bean
 		id="failureHandler"
 		class="qq.security.service.LoginAuthenticationFailureHandler" />
- -->
+	-->
 
 </beans:beans>
 
