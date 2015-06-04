@@ -22,6 +22,7 @@ import qq.security.dao.jpa.UserDao;
 import qq.security.model.DBUser;
 import qq.security.model.Role;
 
+@Service
 public class HBUserDetailsService implements UserDetailsService {
 
 	protected static Logger logger = Logger

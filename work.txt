@@ -1,4 +1,4 @@
-1.security @Secured mavicat 
+1.security @Secured @RoleAllowed 
 
 2.shrio
 

@@ -108,10 +108,11 @@
 		id="passwordEncoder" />
 
 	<!-- 通过 DBUserService,Spring会自动的用户的访问级别 -->
+<!-- 
 	<beans:bean
 		id="dbUserService"
 		class="qq.security.service.HBUserDetailsService" />
-
+ -->
 
 	<!-- 指定一个自定义的authentication-manager :dbUserService -->
 	<!--
@@ -123,7 +124,7 @@
 	-->
 
 	<authentication-manager>
-		<authentication-provider user-service-ref="dbUserService">
+		<authentication-provider user-service-ref="HBUserDetailsService">
 			<password-encoder hash="md5" />
 		</authentication-provider>
 	</authentication-manager>
