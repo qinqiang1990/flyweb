@@ -41,12 +41,10 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
-	
-
+ 
 	<!-- 注解扫描包 -->
-	<context:component-scan base-package="qq.spring"></context:component-scan>
-	<context:component-scan base-package="qq.security"></context:component-scan>
+	<context:component-scan base-package="qq.spring.controller"></context:component-scan>
+	<context:component-scan base-package="qq.security.controller"></context:component-scan>
 	
 	<!-- <context:annotation-config /> -->
 
@@ -65,11 +63,11 @@
 	</bean>
 
 	<!-- 拦截匹配的URL -->
-<!-- 	<mvc:interceptors>
+<!-- 	
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/*" />
-			/user/*
-			<bean class="com.mvc.MyInteceptor"></bean>
+			<bean class="com.mvc.MyInteceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors> 
 -->
@@ -84,10 +82,13 @@
 -->
 
 
-
+	<mvc:resources
+		location="/resources/**"
+		mapping="/resources/**" />
 	<!-- 不进行拦截的 -->
 	<mvc:default-servlet-handler />
-<!-- 	<mvc:resources
+<!-- 	
+	<mvc:resources
 		location="/"
 		mapping="/**/*.html"
 		cache-period="31556926" />
@@ -114,7 +115,8 @@
 	<mvc:resources
 		location="/public/"
 		mapping="/public/**"
-		cache-period="31556926" /> -->
+		cache-period="31556926" /> 
+-->
 
 
 	<!--配置全局的异常 -->

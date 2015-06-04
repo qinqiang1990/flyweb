@@ -64,7 +64,7 @@ public class DBUserDaoTest {
 		orderBy.put("id", "desc");
 		QueryResult<DBUser> qr = dbuserDao.query(0, 2, "", params, orderBy);
 		Assert.assertNotNull(qr);
-		Assert.assertEquals(1, qr.getCount());
+		Assert.assertEquals(4, qr.getCount());
 
 	}
 

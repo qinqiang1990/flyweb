@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,15 +19,18 @@ import qq.security.dao.DBUserDao;
 import qq.security.dao.UserDao;
 import qq.security.model.DBUser;
 
-@Service
-@Transactional(readOnly = true)
-public class DBUserDetailsService implements UserDetailsService {
+public class HBUserDetailsService implements UserDetailsService {
+
+	protected static Logger logger = Logger
+			.getLogger(HBUserDetailsService.class);
 
 	@Autowired
 	private UserDao userDao;
 
 	public UserDetails loadUserByUsername(String login)
 			throws UsernameNotFoundException {
+
+		logger.info("loadUserByUsername");
 
 		/* 这里是认证 */
 		DBUser domainUser = userDao.getDatabase(login);

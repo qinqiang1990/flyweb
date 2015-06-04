@@ -14,6 +14,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Index;
+
 enum Deleted {
 	DEFAULT, SUCCESS, FAILURE
 }
@@ -27,7 +29,7 @@ public abstract class BaseModel {
 	private Date deletedTime;
 	private Deleted deleted = Deleted.DEFAULT;
 	private Integer status = Integer.valueOf(0);
-
+ 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {

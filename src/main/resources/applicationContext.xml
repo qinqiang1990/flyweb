@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -13,19 +17,79 @@
 	default-lazy-init="true">
 
 	<beans>
+	
+		<!-- 注解支持 -->
+		<context:annotation-config />
+
+		<!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
+		<context:component-scan base-package="qq.spring">
+			<context:exclude-filter
+				type="annotation"
+				expression="org.springframework.stereotype.Controller" />
+		</context:component-scan>
+
+		<context:component-scan base-package="qq.security">
+			<context:exclude-filter
+				type="annotation"
+				expression="org.springframework.stereotype.Controller" />
+		</context:component-scan>
+		
+		<!-- 加载属性文件 -->
 		<context:property-placeholder location="classpath*:/application.properties" />
 
 		<!-- Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"
+		<bean
+			id="dataSource"
+			class="org.springframework.jdbc.datasource.SimpleDriverDataSource"
 			destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			<property name="defaultAutoCommit" value="false" />
-			 
+			<property
+				name="driverClassName"
+				value="${jdbc.driver}" />
+			<property
+				name="url"
+				value="${jdbc.url}" />
+			<property
+				name="username"
+				value="${jdbc.username}" />
+			<property
+				name="password"
+				value="${jdbc.password}" />
+			<property
+				name="defaultAutoCommit"
+				value="false" />
+
 		</bean>
+		
+		
+		
+<!-- 
+		扫描myBatis映射文件
+		<bean
+			id="sqlSessionFactory"
+			class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property
+				name="dataSource"
+				ref="dataSource" />
+		自动扫描entity目录
+			<property
+				name="mapperLocations"
+				value="classpath:qq/security/dao/myBatis/*.xml" />
+		</bean>
+	
+		扫描myBatis的Mapper
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<property
+				name="basePackage"
+				value="qq.security.dao.myBatis" />
+			<property
+				name="sqlSessionFactoryBeanName"
+				value="sqlSessionFactory" />
+		</bean>
+ -->
+
+
 	</beans>
+
 
 
 </beans>

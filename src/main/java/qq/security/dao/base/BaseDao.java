@@ -1,6 +1,5 @@
 package qq.security.dao.base;
 
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 public interface BaseDao<T> {

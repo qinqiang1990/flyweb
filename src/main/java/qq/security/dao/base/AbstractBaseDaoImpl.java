@@ -13,10 +13,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 import qq.security.dao.base.BaseDao;
 import qq.security.dao.base.JPAUtils;
 
 public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
+
+	protected static Logger logger = Logger.getLogger("BaseDaoImpl");
 
 	protected EntityManager em = JPAUtils.getEntityManager();
 
@@ -61,6 +65,7 @@ public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 		String jpql = "select o from " + entityName + " o ";
 		Query query = em.createQuery(jpql + sb.toString());
+		logger.info(jpql + sb.toString());
 		// 设置参数
 		setParameters(query, params);
 		if (fistResult > -1 && maxResult > -1)
@@ -98,10 +103,10 @@ public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 	public Object queryForProperty(String property, Long entityId) {
 		String jpql = "select o." + property + " from " + entityName
-				+ " o where o." + getEntityId() + "=:id";
+				+ " o where o." + getEntityId() + "=?1";
 		System.out.println(jpql);
 		Query query = em.createQuery(jpql);
-		query.setParameter("id", entityId);
+		query.setParameter("1", entityId);
 		Object result = null;
 		try {
 			result = query.getSingleResult();
