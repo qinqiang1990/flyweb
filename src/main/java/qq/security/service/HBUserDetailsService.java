@@ -16,9 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import qq.security.dao.DBUserDao;
-import qq.security.dao.UserDao;
 import qq.security.dao.base.QueryResult;
+import qq.security.dao.jpa.DBUserDao;
+import qq.security.dao.jpa.UserDao;
 import qq.security.model.DBUser;
 import qq.security.model.Role;
 

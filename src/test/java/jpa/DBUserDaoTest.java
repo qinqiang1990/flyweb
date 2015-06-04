@@ -6,6 +6,8 @@ import org.junit.*;
 
 import qq.security.dao.*;
 import qq.security.dao.base.*;
+import qq.security.dao.jpa.DBUserDao;
+import qq.security.dao.jpa.utils.JPAUtils;
 import qq.security.model.DBUser;
 
 public class DBUserDaoTest {

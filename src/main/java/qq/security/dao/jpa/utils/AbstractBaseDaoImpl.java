@@ -1,4 +1,4 @@
-package qq.security.dao.base;
+package qq.security.dao.jpa.utils;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -16,7 +16,8 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 import qq.security.dao.base.BaseDao;
-import qq.security.dao.base.JPAUtils;
+import qq.security.dao.base.QueryResult;
+import qq.security.dao.jpa.utils.JPAUtils;
 
 public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 

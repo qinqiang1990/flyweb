@@ -1,4 +1,4 @@
-package qq.security.dao;
+package qq.security.dao.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
