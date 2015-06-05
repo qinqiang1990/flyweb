@@ -1,121 +1,52 @@
-<?xml version="1.0" encoding="gbk"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <ehcache
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd">
-
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
 	<diskStore path="java.io.tmpdir" />
- 
-    <!-- 
-
-        ÅäÖÃ×Ô¶¨Òå»º´æ
-
-        maxElementsInMemory£º»º´æÖÐÔÊÐí´´½¨µÄ×î´ó¶ÔÏóÊý
-
-        eternal£º»º´æÖÐ¶ÔÏóÊÇ·ñÎªÓÀ¾ÃµÄ£¬Èç¹ûÊÇ£¬³¬Ê±ÉèÖÃ½«±»ºöÂÔ£¬¶ÔÏó´Ó²»¹ýÆÚ¡£
-
-        timeToIdleSeconds£º»º´æÊý¾ÝµÄ¶Û»¯Ê±¼ä£¬Ò²¾ÍÊÇÔÚÒ»¸öÔªËØÏûÍöÖ®Ç°£¬
-
-                    Á½´Î·ÃÎÊÊ±¼äµÄ×î´óÊ±¼ä¼ä¸ôÖµ£¬ÕâÖ»ÄÜÔÚÔªËØ²»ÊÇÓÀ¾Ã×¤ÁôÊ±ÓÐÐ§£¬
-
-                    Èç¹û¸ÃÖµÊÇ 0 ¾ÍÒâÎ¶×ÅÔªËØ¿ÉÒÔÍ£¶ÙÎÞÇî³¤µÄÊ±¼ä¡£
-
-        timeToLiveSeconds£º»º´æÊý¾ÝµÄÉú´æÊ±¼ä£¬Ò²¾ÍÊÇÒ»¸öÔªËØ´Ó¹¹½¨µ½ÏûÍöµÄ×î´óÊ±¼ä¼ä¸ôÖµ£¬
-
-                    ÕâÖ»ÄÜÔÚÔªËØ²»ÊÇÓÀ¾Ã×¤ÁôÊ±ÓÐÐ§£¬Èç¹û¸ÃÖµÊÇ0¾ÍÒâÎ¶×ÅÔªËØ¿ÉÒÔÍ£¶ÙÎÞÇî³¤µÄÊ±¼ä¡£
-
-        overflowToDisk£ºÄÚ´æ²»×ãÊ±£¬ÊÇ·ñÆôÓÃ´ÅÅÌ»º´æ¡£
-
-        memoryStoreEvictionPolicy£º»º´æÂúÁËÖ®ºóµÄÌÔÌ­Ëã·¨¡£
-
-    -->
+	<!--
+		é…ç½®è‡ªå®šä¹‰ç¼“å­˜
+		maxElementsInMemoryï¼šç¼“å­˜ä¸­å…è®¸åˆ›å»ºçš„æœ€å¤§å¯¹è±¡æ•°
+		eternalï¼šç¼“å­˜ä¸­å¯¹è±¡æ˜¯å¦ä¸ºæ°¸ä¹…çš„ï¼Œå¦‚æžœæ˜¯ï¼Œè¶…æ—¶è®¾ç½®å°†è¢«å¿½ç•¥ï¼Œå¯¹è±¡ä»Žä¸è¿‡æœŸã€‚
+		timeToIdleSecondsï¼šç¼“å­˜æ•°æ®çš„é’åŒ–æ—¶é—´ï¼Œä¹Ÿå°±æ˜¯åœ¨ä¸€ä¸ªå…ƒç´ æ¶ˆäº¡ä¹‹å‰ï¼Œ
+		ä¸¤æ¬¡è®¿é—®æ—¶é—´çš„æœ€å¤§æ—¶é—´é—´éš”å€¼ï¼Œè¿™åªèƒ½åœ¨å…ƒç´ ä¸æ˜¯æ°¸ä¹…é©»ç•™æ—¶æœ‰æ•ˆï¼Œ
+		å¦‚æžœè¯¥å€¼æ˜¯ 0 å°±æ„å‘³ç€å…ƒç´ å¯ä»¥åœé¡¿æ— ç©·é•¿çš„æ—¶é—´ã€‚
+		timeToLiveSecondsï¼šç¼“å­˜æ•°æ®çš„ç”Ÿå­˜æ—¶é—´ï¼Œä¹Ÿå°±æ˜¯ä¸€ä¸ªå…ƒç´ ä»Žæž„å»ºåˆ°æ¶ˆäº¡çš„æœ€å¤§æ—¶é—´é—´éš”å€¼ï¼Œ
+		è¿™åªèƒ½åœ¨å…ƒç´ ä¸æ˜¯æ°¸ä¹…é©»ç•™æ—¶æœ‰æ•ˆï¼Œå¦‚æžœè¯¥å€¼æ˜¯0å°±æ„å‘³ç€å…ƒç´ å¯ä»¥åœé¡¿æ— ç©·é•¿çš„æ—¶é—´ã€‚
+		overflowToDiskï¼šå†…å­˜ä¸è¶³æ—¶ï¼Œæ˜¯å¦å¯ç”¨ç£ç›˜ç¼“å­˜ã€‚
+		memoryStoreEvictionPolicyï¼šç¼“å­˜æ»¡äº†ä¹‹åŽçš„æ·˜æ±°ç®—æ³•ã€‚
+	-->
 
 	<defaultCache
-		name="DEFAULT_CACHE"
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="30"
 		timeToLiveSeconds="30"
 		overflowToDisk="false" />
+
 	<cache
 		name="SimplePageCachingFilter"
-
 		maxElementsInMemory="10000"
-
 		eternal="false"
-
 		overflowToDisk="false"
-
 		timeToIdleSeconds="900"
-
 		timeToLiveSeconds="1800"
-
 		memoryStoreEvictionPolicy="LFU" />
 
 
-
-
-	<!-- acegi cache-->
+	<!-- acegi cache -->
 	<cache
 		name="userCache"
 		maxElementsInMemory="10000"
 		eternal="true"
 		overflowToDisk="true" />
 
-	<!-- acegi cache-->
+	<!-- acegi cache -->
 	<cache
 		name="resourceCache"
 		maxElementsInMemory="10000"
 		eternal="true"
 		overflowToDisk="true" />
 
-    <!--Predefined caches.  Add your cache configuration settings here.
-        If you do not have a configuration for your cache a WARNING will be issued when the
-        CacheManager starts
 
-        The following attributes are required for defaultCache:
-
-        name              - Sets the name of the cache. This is used to identify the cache. It must be unique.
-        maxInMemory       - Sets the maximum number of objects that will be created in memory
-        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
-                            is never expired.
-        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
-                            if the element is not eternal. Idle time is now - last accessed time
-        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
-                            if the element is not eternal. TTL is now - creation time
-        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
-                            has reached the maxInMemory limit.
-
-        -->
-
-    <!-- Sample cache named sampleCache1
-        This cache contains a maximum in memory of 10000 elements, and will expire
-        an element if it is idle for more than 5 minutes and lives for more than
-        10 minutes.
-
-        If there are more than 10000 elements it will overflow to the
-        disk cache, which in this configuration will go to wherever java.io.tmp is
-        defined on your system. On a standard Linux system this will be /tmp"
-
-    <cache name="sampleCache1"
-        maxElementsInMemory="10000"
-        eternal="false"
-        timeToIdleSeconds="300"
-        timeToLiveSeconds="600"
-        overflowToDisk="true"
-        />
-
-    Sample cache named sampleCache2
-        This cache contains 1000 elements. Elements will always be held in memory.
-        They are not expired.
-    <cache name="sampleCache2"
-        maxElementsInMemory="1000"
-        eternal="true"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
-        overflowToDisk="false"
-        /> -->
-
-    <!-- Place configuration for your caches following -->
 
 </ehcache>

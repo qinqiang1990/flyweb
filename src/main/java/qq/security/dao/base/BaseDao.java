@@ -3,14 +3,20 @@ package qq.security.dao.base;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
 public interface BaseDao<T> {
 
 	public void persist(T entity);
 
+	@Cacheable(value = "userCache", key = "#entity.id")
 	public void merge(T entity);
 
+	@CacheEvict(value = "userCache", key = "#entityIds")
 	public void remove(Long... entityIds);
 
+	@Cacheable(value = "userCache", key = "#entityId")
 	public T find(Long entityId);
 
 	public QueryResult<T> query(int fistResult, int maxResult, String whereSql,
@@ -31,6 +37,7 @@ public interface BaseDao<T> {
 
 	public Object queryForProperty(String property, Long entityId);
 
-	public Object queryBy(String whereSql,Object[] params);
+	@Cacheable(value = "userCache")
+	public Object queryBy(String whereSql, Object[] params);
 
 }

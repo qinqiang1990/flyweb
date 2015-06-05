@@ -7,17 +7,20 @@
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/cache  
+		http://www.springframework.org/schema/cache/spring-cache-3.2.xsd"
 	default-lazy-init="true">
 
 	<beans>
-	
+
 		<!-- 注解支持 -->
 		<context:annotation-config />
 
@@ -33,7 +36,7 @@
 				type="annotation"
 				expression="org.springframework.stereotype.Controller" />
 		</context:component-scan>
-		
+
 		<!-- 加载属性文件 -->
 		<context:property-placeholder location="classpath*:/application.properties" />
 
@@ -59,73 +62,121 @@
 			</property>
 			<property name="password">
 				<value>${dataSource.password}</value>
-			</property>  
-			
-  		<!-- 最大连接数 -->
+			</property>
+
+			<!-- 最大连接数 -->
 			<property name="maxPoolSize">
 				<value>${dataSource.c3p0.max_size}</value>
-			</property>  
-   
-        <!-- 最小连接数 -->
+			</property>
+
+			<!-- 最小连接数 -->
 			<property name="minPoolSize">
 				<value>${dataSource.c3p0.min_size}</value>
-			</property>  
-   
-        <!-- 最大空闲时间，超时未被使用则连接被抛弃，单位毫秒 -->
+			</property>
+
+			<!-- 最大空闲时间，超时未被使用则连接被抛弃，单位毫秒 -->
 			<property name="maxIdleTime">
 				<value>${dataSource.c3p0.max_idle_time}</value>
-			</property>  
-   
-        <!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
+			</property>
+
+			<!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
 			<property name="checkoutTimeout">
 				<value>${dataSource.c3p0.checkout_timeout}</value>
-			</property>  
-       		  
-   
-        <!-- 最大的PreparedStatement的数量 -->
+			</property>
+
+
+			<!-- 最大的PreparedStatement的数量 -->
 			<property name="maxStatements">
 				<value>${dataSource.c3p0.max_statements}</value>
-			</property>  
-   
-        <!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒 -->
+			</property>
+
+			<!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒 -->
 			<property name="idleConnectionTestPeriod">
 				<value>
 					${dataSource.c3p0.idle_test_period}
 				</value>
-			</property>  
-   
-        <!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
+			</property>
+
+			<!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
 			<property name="acquireIncrement">
 				<value>${dataSource.c3p0.acquire_increment}</value>
 			</property>
 		</bean>
-		
-		
-		
-<!-- 
-		扫描myBatis映射文件
-		<bean
+
+
+
+		<!--
+			扫描myBatis映射文件
+			<bean
 			id="sqlSessionFactory"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property
-				name="dataSource"
-				ref="dataSource" />
-		自动扫描entity目录
+			name="dataSource"
+			ref="dataSource" />
+			自动扫描entity目录
 			<property
-				name="mapperLocations"
-				value="classpath:qq/security/dao/myBatis/*.xml" />
+			name="mapperLocations"
+			value="classpath:qq/security/dao/myBatis/*.xml" />
+			</bean>
+
+			扫描myBatis的Mapper
+			<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<property
+			name="basePackage"
+			value="qq.security.dao.myBatis" />
+			<property
+			name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+			</bean>
+		-->
+
+
+		<!-- 缓存 属性 -->
+		<bean
+			id="cacheManagerFactory"
+			class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+			<property
+				name="configLocation"
+				value="classpath:com/config/ehcache.xml" />
 		</bean>
-	
-		扫描myBatis的Mapper
-		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+		<!-- 缓存配置 -->
+		<!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) -->
+		<cache:annotation-driven cache-manager="cacheManager" />
+		<!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的) -->
+		<!--
+			<bean
+			id="cacheManager"
+			class="org.springframework.cache.support.SimpleCacheManager">
+			<property name="caches">
+			<set>
+			<bean
+			name="myCache"
+			class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" 
+			/>
+			</set>
+			</property>
+			</bean>
+		-->
+		<!-- 若只想使用Spring自身提供的缓存器,则注释掉下面的两个关于Ehcache配置的bean,并启用上面的SimpleCacheManager即可 -->
+		<!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+		<bean
+			id="cacheManagerFactory"
+			class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 			<property
-				name="basePackage"
-				value="qq.security.dao.myBatis" />
-			<property
-				name="sqlSessionFactoryBeanName"
-				value="sqlSessionFactory" />
+				name="configLocation"
+				value="classpath:ehcache.xml" />
 		</bean>
- -->
+		
+		<!-- value="/WEB-INF/ehcache.xml" -->
+
+		<bean
+			id="cacheManager"
+			class="org.springframework.cache.ehcache.EhCacheCacheManager">
+			<property
+				name="cacheManager"
+				ref="cacheManagerFactory" />
+		</bean>
 
 
 	</beans>
