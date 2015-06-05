@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<ehcache
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<diskStore path="java.io.tmpdir" />
+ 
+    <!-- 
+
+        配置自定义缓存
+
+        maxElementsInMemory：缓存中允许创建的最大对象数
+
+        eternal：缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期。
+
+        timeToIdleSeconds：缓存数据的钝化时间，也就是在一个元素消亡之前，
+
+                    两次访问时间的最大时间间隔值，这只能在元素不是永久驻留时有效，
+
+                    如果该值是 0 就意味着元素可以停顿无穷长的时间。
+
+        timeToLiveSeconds：缓存数据的生存时间，也就是一个元素从构建到消亡的最大时间间隔值，
+
+                    这只能在元素不是永久驻留时有效，如果该值是0就意味着元素可以停顿无穷长的时间。
+
+        overflowToDisk：内存不足时，是否启用磁盘缓存。
+
+        memoryStoreEvictionPolicy：缓存满了之后的淘汰算法。
+
+    -->
+
+	<defaultCache
+		name="DEFAULT_CACHE"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="30"
+		timeToLiveSeconds="30"
+		overflowToDisk="false" />
+	<cache
+		name="SimplePageCachingFilter"
+
+		maxElementsInMemory="10000"
+
+		eternal="false"
+
+		overflowToDisk="false"
+
+		timeToIdleSeconds="900"
+
+		timeToLiveSeconds="1800"
+
+		memoryStoreEvictionPolicy="LFU" />
+
+
+
+
+	<!-- acegi cache-->
+	<cache
+		name="userCache"
+		maxElementsInMemory="10000"
+		eternal="true"
+		overflowToDisk="true" />
+
+	<!-- acegi cache-->
+	<cache
+		name="resourceCache"
+		maxElementsInMemory="10000"
+		eternal="true"
+		overflowToDisk="true" />
+
+    <!--Predefined caches.  Add your cache configuration settings here.
+        If you do not have a configuration for your cache a WARNING will be issued when the
+        CacheManager starts
+
+        The following attributes are required for defaultCache:
+
+        name              - Sets the name of the cache. This is used to identify the cache. It must be unique.
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+
+    <!-- Sample cache named sampleCache1
+        This cache contains a maximum in memory of 10000 elements, and will expire
+        an element if it is idle for more than 5 minutes and lives for more than
+        10 minutes.
+
+        If there are more than 10000 elements it will overflow to the
+        disk cache, which in this configuration will go to wherever java.io.tmp is
+        defined on your system. On a standard Linux system this will be /tmp"
+
+    <cache name="sampleCache1"
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="300"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        />
+
+    Sample cache named sampleCache2
+        This cache contains 1000 elements. Elements will always be held in memory.
+        They are not expired.
+    <cache name="sampleCache2"
+        maxElementsInMemory="1000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+        /> -->
+
+    <!-- Place configuration for your caches following -->
+
+</ehcache>

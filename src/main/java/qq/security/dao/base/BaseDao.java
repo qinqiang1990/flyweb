@@ -1,6 +1,7 @@
 package qq.security.dao.base;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public interface BaseDao<T> {
 
@@ -29,5 +30,7 @@ public interface BaseDao<T> {
 	public QueryResult<T> query(String whereSql, Object[] params);
 
 	public Object queryForProperty(String property, Long entityId);
+
+	public Object queryBy(String whereSql,Object[] params);
 
 }

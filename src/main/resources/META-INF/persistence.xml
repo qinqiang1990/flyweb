@@ -25,7 +25,7 @@
 				value="root" />
 			<property
 				name="hibernate.connection.password"
-				value="111111" />
+				value="qin1990" />
 			<property
 				name="hibernate.hbm2ddl.auto"
 				value="update" />

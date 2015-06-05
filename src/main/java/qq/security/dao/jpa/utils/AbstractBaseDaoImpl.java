@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -21,7 +22,8 @@ import qq.security.dao.jpa.utils.JPAUtils;
 
 public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
-	protected static Logger logger = Logger.getLogger("BaseDaoImpl");
+	protected static Logger logger = Logger
+			.getLogger(AbstractBaseDaoImpl.class);
 
 	protected EntityManager em = JPAUtils.getEntityManager();
 
@@ -100,6 +102,25 @@ public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 	public QueryResult<T> query(String whereSql, Object[] params) {
 		return query(-1, -1, whereSql, params, null);
+	}
+
+	public Object queryBy(String whereSql, Object[] params) {
+
+		StringBuffer sb = new StringBuffer();
+		// 拼凑where语句
+		if (null != whereSql && !"".equals(whereSql.trim())) {
+			sb.append(" where 1=1 and ").append(whereSql.trim()).append(" ");
+		}
+		String jpql = "select o from " + entityName + " o ";
+		Query query = em.createQuery(jpql + sb.toString());
+		logger.info(jpql + sb.toString());
+		setParameters(query, params);
+		Object result = null;
+		try {
+			result = query.getSingleResult();
+		} catch (RuntimeException e) {
+		}
+		return result;
 	}
 
 	public Object queryForProperty(String property, Long entityId) {

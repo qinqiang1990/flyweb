@@ -1,4 +1,4 @@
-1.security @Secured @RoleAllowed 
+1.security @Secured  ehcache	redis
 
 2.shrio
 

@@ -14,13 +14,15 @@
 
 	<!-- 启用annotation -->
 
-	<!--
-		<global-method-security
+
+<!--
+	 	<global-method-security
 		secured-annotations="enabled"
 		jsr250-annotations="enabled"
-		pre-post-annotations="enabled" />
-
-	-->
+		pre-post-annotations="enabled"
+		 />
+ -->
+ 
 
 	<!--
 		<global-method-security>
@@ -37,11 +39,10 @@
 		security="none"
 		pattern="/auth/login*" />
 
-	<http auto-config="true">
-
-		<access-denied-handler error-page="/error/deny" />
-
-
+	<http
+		auto-config="true"
+		access-denied-page="/sessionTimeout.html">
+  
 		<!--
 			default-target-url 指定了从登录页面登录后进行跳转的页面
 			always-use-default-target true表示登录成功后强制跳转
@@ -53,34 +54,99 @@
 		<form-login
 			always-use-default-target="true"
 			login-page="/auth/login"
-			default-target-url="/book/list" />
+			default-target-url="/book/index" />
 
 		<logout
 			invalidate-session="true"
 			logout-success-url="/auth/login"
 			logout-url="/auth/logout" />
 
-		<intercept-url
+	<!-- 	<intercept-url
 			pattern="/book/update"
-			access="ROLE_USER" />
+			access="ROLE_UPDATE" />
 
 		<intercept-url
 			pattern="/book/add"
-			access="ROLE_ADMIN" />
+			access="ROLE_ADD" />
 
 		<intercept-url
 			pattern="/book/list"
-			access="ROLE_ADMIN,ROLE_USER" />
-
+			access="ROLE_ADD,ROLE_UPDATE" />
+ -->
 
 		<!-- 会话同步 -->
-		<session-management invalid-session-url="/seesoinTimeout.html">
+		<session-management invalid-session-url="/auth/login">
 			<concurrency-control
 				max-sessions="1"
 				error-if-maximum-exceeded="true" />
 		</session-management>
 
+		<!-- http://blog.csdn.net/dyllove98/article/details/8586293 -->
+		
+   		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
+
+		<custom-filter
+			ref="filterSecurityInterceptor"
+			before="FILTER_SECURITY_INTERCEPTOR" />
+
 	</http>
+
+	
+	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性。 -->
+	<beans:bean
+		id="filterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+
+		<!-- 登陆的认证 -->
+		<beans:property
+			name="authenticationManager"
+			ref="authenticationManager" />
+
+		<!-- 资源访问决策 -->
+		<beans:property
+			name="accessDecisionManager"
+			ref="accessDecisionManager" />
+
+
+		<!-- 资源和权限列表 -->
+		<beans:property
+			name="securityMetadataSource"
+			ref="methodSecurityMetadataSource" />
+
+	</beans:bean>
+ 
+
+ 
+	<!-- access decision manager -->
+<!-- 
+	class="org.springframework.security.access.vote.UnanimousBased"
+	id="unanimousBased"
+-->
+	<beans:bean
+		id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property
+			name="allowIfAllAbstainDecisions"
+			value="false" />
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:ref bean="roleVoter" />
+
+				<beans:ref bean="authenticatedVoter" />
+
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+
+	<beans:bean
+		class="org.springframework.security.access.vote.RoleVoter"
+		id="roleVoter" />
+
+	<beans:bean
+		class="org.springframework.security.access.vote.AuthenticatedVoter"
+		id="authenticatedVoter" /> 
+  
 
 	<!--
 		<authentication-manager>
@@ -106,13 +172,7 @@
 	<beans:bean
 		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"
 		id="passwordEncoder" />
-
-	<!-- 通过 DBUserService,Spring会自动的用户的访问级别 -->
-<!-- 
-	<beans:bean
-		id="dbUserService"
-		class="qq.security.service.HBUserDetailsService" />
- -->
+ 
 
 	<!-- 指定一个自定义的authentication-manager :dbUserService -->
 	<!--
@@ -123,11 +183,12 @@
 		</authentication-manager>
 	-->
 
-	<authentication-manager>
-		<authentication-provider user-service-ref="HBUserDetailsService">
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="hbUserDetailsService">
 			<password-encoder hash="md5" />
 		</authentication-provider>
 	</authentication-manager>
+
 
 	<!-- 国际化 -->
 	<!--

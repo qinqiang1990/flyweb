@@ -25,6 +25,8 @@ public class Role extends BaseModel {
 
 	private Set<User> users = new HashSet<User>();;
 
+	private Set<Controller> controllers = new HashSet<Controller>();;
+
 	public String getRolename() {
 		return rolename;
 	}
@@ -48,6 +50,16 @@ public class Role extends BaseModel {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "role_controller", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "controller_id", referencedColumnName = "id") })
+	public Set<Controller> getControllers() {
+		return controllers;
+	}
+
+	public void setControllers(Set<Controller> controllers) {
+		this.controllers = controllers;
 	}
 
 }

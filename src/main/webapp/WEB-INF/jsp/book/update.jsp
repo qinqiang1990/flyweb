@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MEIZU MX3</title>
 </head>
-<body>${message} in HELLO.JSP
-
-<br/>
-<a href="/auth/logout">推出系统</a>
+<body>
+	${message} HELLO.JSP
+	<br />
+	<a href="/auth/logout">推出系统</a>
 </body>
 </html>

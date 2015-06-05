@@ -36,4 +36,10 @@ public class BookController {
 	public List<Book> list(Book book) {
 		return bookservice.list(book);
 	}
+
+	@RequestMapping(value = "/index")
+	public String index(Book book, Model model) {
+		model.addAttribute("message", "index");
+		return "book/index";
+	}
 }

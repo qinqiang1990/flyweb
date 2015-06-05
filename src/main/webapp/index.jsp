@@ -16,7 +16,7 @@
 
 	<h1>welcome</h1>
 	这是首页欢迎
-	<sec:authentication property="name" />
+	<%-- <sec:authentication property="name" />
 	!
 	<br>
 	<sec:authorize ifAllGranted="ROLE_ADMIN">
@@ -24,7 +24,7 @@
 	</sec:authorize>
 	<sec:authorize ifAllGranted="ROLE_USER">
 		<a href="book/update">book/update</a>
-	</sec:authorize>
+	</sec:authorize> --%>
 	<!-- ifAllGranted	ifAnyGranted	ifNotGranted -->
 
 	<a href="../j_spring_security_logout">退出系统</a>

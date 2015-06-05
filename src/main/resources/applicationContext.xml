@@ -37,27 +37,67 @@
 		<!-- 加载属性文件 -->
 		<context:property-placeholder location="classpath*:/application.properties" />
 
+		<!-- org.springframework.jdbc.datasource.SimpleDriverDataSource -->
 		<!-- Tomcat JDBC连接池 -->
 		<bean
 			id="dataSource"
-			class="org.springframework.jdbc.datasource.SimpleDriverDataSource"
+			class="com.mchange.v2.c3p0.ComboPooledDataSource"
 			destroy-method="close">
-			<property
-				name="driverClassName"
-				value="${jdbc.driver}" />
-			<property
-				name="url"
-				value="${jdbc.url}" />
-			<property
-				name="username"
-				value="${jdbc.username}" />
-			<property
-				name="password"
-				value="${jdbc.password}" />
-			<property
-				name="defaultAutoCommit"
-				value="false" />
 
+			<property name="defaultAutoCommit">
+				<value>false</value>
+			</property>
+
+			<property name="driverClass">
+				<value>${dataSource.driverClassName}</value>
+			</property>
+			<property name="url">
+				<value>${dataSource.url}</value>
+			</property>
+			<property name="user">
+				<value>${dataSource.username}</value>
+			</property>
+			<property name="password">
+				<value>${dataSource.password}</value>
+			</property>  
+			
+  		<!-- 最大连接数 -->
+			<property name="maxPoolSize">
+				<value>${dataSource.c3p0.max_size}</value>
+			</property>  
+   
+        <!-- 最小连接数 -->
+			<property name="minPoolSize">
+				<value>${dataSource.c3p0.min_size}</value>
+			</property>  
+   
+        <!-- 最大空闲时间，超时未被使用则连接被抛弃，单位毫秒 -->
+			<property name="maxIdleTime">
+				<value>${dataSource.c3p0.max_idle_time}</value>
+			</property>  
+   
+        <!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
+			<property name="checkoutTimeout">
+				<value>${dataSource.c3p0.checkout_timeout}</value>
+			</property>  
+       		  
+   
+        <!-- 最大的PreparedStatement的数量 -->
+			<property name="maxStatements">
+				<value>${dataSource.c3p0.max_statements}</value>
+			</property>  
+   
+        <!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒 -->
+			<property name="idleConnectionTestPeriod">
+				<value>
+					${dataSource.c3p0.idle_test_period}
+				</value>
+			</property>  
+   
+        <!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
+			<property name="acquireIncrement">
+				<value>${dataSource.c3p0.acquire_increment}</value>
+			</property>
 		</bean>
 		
 		
