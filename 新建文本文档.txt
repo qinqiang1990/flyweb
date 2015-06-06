@@ -121,3 +121,23 @@ public class BuyerSpringTest extends AbstractTestCase {
     <ehcache:config cache-manager="cacheManager"/>
 	
 }  http://firethemax.iteye.com/blog/1750268
+
+
+       @TriggersRemove(cacheName="baseCache",removeAll=true)  
+public Entity save(Entity entity) throws CrudException {  
+    return entity;  
+}  
+  
+@TriggersRemove(cacheName="baseCache",removeAll=true)  
+public Entity update(Entity entity) throws CrudException {  
+    return entity;  
+}  
+  
+@TriggersRemove(cacheName="baseCache",removeAll=true)  
+public void del(Entity entity) throws CrudException {  
+        }  
+  
+@Cacheable(cacheName="baseCache")   @SuppressWarnings("unchecked")  
+public List<Entity> findAll() throws SearchException {  
+    return list;  
+}  
