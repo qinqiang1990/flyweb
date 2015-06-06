@@ -10,6 +10,9 @@
 		name="JPAPU"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>qq.security.model.User</class>
+		<class>qq.security.model.Role</class>
+		<class>qq.security.model.Controller</class>
 		<properties>
 			<property
 				name="hibernate.dialect"
@@ -25,7 +28,7 @@
 				value="root" />
 			<property
 				name="hibernate.connection.password"
-				value="qin1990" />
+				value="111111" />
 			<property
 				name="hibernate.hbm2ddl.auto"
 				value="update" />

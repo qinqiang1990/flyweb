@@ -20,13 +20,10 @@ import qq.security.dao.jpa.UserDao;
 import qq.security.dao.jpa.UserDaoImpl;
 import static org.mockito.Mockito.*;
 
-/*@Configuration
- @ComponentScan(basePackages = "spring.mvc")
- @PropertySource("classpath:application.properties")*/
-
-//@RunWith(SpringJUnit4ClassRunner.class)
-/* @ContextConfiguration(locations = { "applicationContext.xml" }) */
-// @ContextConfiguration(locations = "classpath*:/applicationContext.xml")
+// @ComponentScan(basePackages = "spring.mvc")
+@PropertySource("/application.properties")
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CachingTest {
 	/*
 	 * @Autowired protected ApplicationContext ctx;
@@ -35,16 +32,20 @@ public class CachingTest {
 	 * @Autowired EhCacheCacheManager cacheManager;
 	 */
 
-	/*
-	 * @Autowired
-	 */
+	@Autowired
+	UserDao userDao;
 
 	@Test
 	public void testCaching_MessagesCache() {
-		ApplicationContext act = new ClassPathXmlApplicationContext(
-				"/applicationContext.xml");
 
-		UserDao userDao = (UserDao) act.getBean("uerDao");
+		/*
+		 * ApplicationContext act = new ClassPathXmlApplicationContext( new
+		 * String[] { "applicationContext.xml" });
+		 */
+
+		/*
+		 * UserDao userDao = (UserDao) act.getBean("userDaoImpl");
+		 */
 		userDao.find(1L);
 
 		// verify(userDao).find(any(Long.class));

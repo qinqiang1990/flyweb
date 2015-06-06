@@ -8,8 +8,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:cache="http://www.springframework.org/schema/cache"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
@@ -26,15 +25,11 @@
 
 		<!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
 		<context:component-scan base-package="qq.spring">
-			<context:exclude-filter
-				type="annotation"
-				expression="org.springframework.stereotype.Controller" />
+
 		</context:component-scan>
 
 		<context:component-scan base-package="qq.security">
-			<context:exclude-filter
-				type="annotation"
-				expression="org.springframework.stereotype.Controller" />
+
 		</context:component-scan>
 
 		<!-- 加载属性文件 -->
@@ -131,11 +126,11 @@
 		-->
 
 
-	
+
 		<!-- 缓存配置 -->
 		<!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) -->
-		<cache:annotation-driven cache-manager="cacheManager" />
-		<!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的) -->
+		<!-- <cache:annotation-driven cache-manager="cacheManager" />
+		-->	<!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的) -->
 		<!--
 			<bean
 			id="cacheManager"
@@ -144,7 +139,7 @@
 			<set>
 			<bean
 			name="myCache"
-			class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" 
+			class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
 			/>
 			</set>
 			</property>
@@ -152,24 +147,24 @@
 		-->
 		<!-- 若只想使用Spring自身提供的缓存器,则注释掉下面的两个关于Ehcache配置的bean,并启用上面的SimpleCacheManager即可 -->
 		<!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
-		<bean
+		<!-- <bean
 			id="cacheManagerFactory"
 			class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 			<property
-				name="configLocation"
-				value="classpath*:/ehcache.xml" />
-		</bean>
-		
-		<!-- value="/WEB-INF/ehcache.xml" -->
+			name="configLocation"
+			value="classpath*:/ehcache.xml" />
+			</bean>
 
-		<bean
+			value="/WEB-INF/ehcache.xml"
+
+			<bean
 			id="cacheManager"
 			class="org.springframework.cache.ehcache.EhCacheCacheManager">
 			<property
-				name="cacheManager"
-				ref="cacheManagerFactory" />
-		</bean>
-
+			name="cacheManager"
+			ref="cacheManagerFactory" />
+			</bean>
+		-->
 
 
 	</beans>
