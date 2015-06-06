@@ -57,7 +57,6 @@ public class MethodSecurityMetadataSource implements
 	private ControllerDao controllerDao;
 
 	// According to a URL, Find out permission configuration of this URL.
-	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object)
 			throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -76,7 +75,6 @@ public class MethodSecurityMetadataSource implements
 		return attrs;
 	}
 
-	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		// TODO Auto-generated method stub
 
@@ -91,7 +89,6 @@ public class MethodSecurityMetadataSource implements
 
 	}
 
-	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
 		return FilterInvocation.class.isAssignableFrom(clazz);
