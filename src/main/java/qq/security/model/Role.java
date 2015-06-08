@@ -19,6 +19,11 @@ import model.BaseModel;
 @Table(name = "role")
 public class Role extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3743915304755056855L;
+
 	private String rolename;
 
 	private String access;

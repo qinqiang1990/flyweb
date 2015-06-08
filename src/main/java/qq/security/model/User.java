@@ -16,6 +16,11 @@ import model.BaseModel;
 @Table(name = "user")
 public class User extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4149794534435030662L;
+
 	private String login;
 
 	private String password;

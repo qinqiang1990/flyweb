@@ -55,15 +55,15 @@ public class MethodSecurityMetadataSource implements
 	private Map<RequestMatcher, Collection<ConfigAttribute>> requestMap;
 
 	@Autowired
-	private ControllerDao controllerDao;
-
-	@Autowired
 	private ControllerService controllerService;
 
 	// According to a URL, Find out permission configuration of this URL.
 	public Collection<ConfigAttribute> getAttributes(Object object)
 			throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+
+		this.init();
+
 		HttpServletRequest request = ((FilterInvocation) object).getRequest();
 
 		Collection<ConfigAttribute> attrs = NULL_CONFIG_ATTRIBUTE;
@@ -75,12 +75,14 @@ public class MethodSecurityMetadataSource implements
 				break;
 			}
 		}
-		logger.info("URL资源：" + request.getRequestURI() + " -> " + attrs);
+
 		return attrs;
 	}
 
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		// TODO Auto-generated method stub
+
+		this.init();
 
 		Set<ConfigAttribute> allAttributes = new HashSet<ConfigAttribute>();
 
@@ -98,45 +100,11 @@ public class MethodSecurityMetadataSource implements
 		return FilterInvocation.class.isAssignableFrom(clazz);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	@PostConstruct
-	public void init() throws Exception {
+	public void init() {
 
 		this.requestMap = controllerService.bindRequestMap();
-		// this.requestMap = this.bindRequestMap();
+
 		logger.info("init" + this.requestMap);
-	}
-
-	protected Map<RequestMatcher, Collection<ConfigAttribute>> bindRequestMap() {
-
-		Map<RequestMatcher, Collection<ConfigAttribute>> map = new LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>>();
-
-		List<Controller> controller_list = controllerDao.query(null, null)
-				.getResults();
-
-		Iterator<Controller> controller_it = controller_list.iterator();
-		while (controller_it.hasNext()) {
-			Controller controller = controller_it.next();
-			String url = controller.getUrl();
-
-			Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
-
-			Set<Role> roles = controller.getRoles();
-			Iterator<Role> role_it = roles.iterator();
-			while (role_it.hasNext()) {
-				Role role = role_it.next();
-				ConfigAttribute ca = new SecurityConfig(role.getRolename());
-				atts.add(ca);
-			}
-			map.put(new AntPathRequestMatcher(url), atts);
-		}
-
-		return map;
 	}
 
 }

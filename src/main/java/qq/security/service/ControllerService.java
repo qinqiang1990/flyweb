@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.AntPathRequestMatcher;
 import org.springframework.security.web.util.RequestMatcher;
 import org.springframework.stereotype.Service;
-
-import com.googlecode.ehcache.annotations.Cacheable;
 
 import qq.security.dao.jpa.ControllerDao;
 import qq.security.model.Controller;
@@ -27,11 +27,12 @@ public class ControllerService {
 	@Autowired
 	ControllerDao controllerDao;
 
+	@CacheEvict(value = "ControllerCache", allEntries = true)
 	public Controller find(Long entityId) {
 		return controllerDao.find(entityId);
 	}
 
-	@Cacheable(cacheName = "userCache")
+	@Cacheable(value = "ControllerCache")
 	// 获取权限列表
 	public Map<RequestMatcher, Collection<ConfigAttribute>> bindRequestMap() {
 

@@ -13,12 +13,12 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 
-	@Cacheable(value = "userCache", key = "#entityId")
+	@Cacheable(value = "UserCache", key = "#entityId")
 	public User find(Long entityId) {
 		return userDao.find(entityId);
 	}
 
-	@CacheEvict(value = "userCache", key = "#entityIds")
+	@CacheEvict(value = "UserCache", key = "#entityIds")
 	public void remove(Long... entityIds) {
 		userDao.remove(entityIds);
 	}

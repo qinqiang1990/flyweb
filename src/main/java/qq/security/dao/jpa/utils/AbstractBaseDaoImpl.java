@@ -12,20 +12,24 @@ import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import qq.security.dao.base.BaseDao;
 import qq.security.dao.base.QueryResult;
-import qq.security.dao.jpa.utils.JPAUtils;
 
+@Transactional
 public abstract class AbstractBaseDaoImpl<T> implements BaseDao<T> {
 
 	protected static Logger logger = Logger
 			.getLogger(AbstractBaseDaoImpl.class);
-
-	protected EntityManager em = JPAUtils.getEntityManager();
+	// 注入实体管理器
+	@PersistenceContext
+	protected EntityManager em;
+	//protected EntityManager em = JPAUtils.getEntityManager();
 
 	@SuppressWarnings("unchecked")
 	protected Class<T> entityClass = (Class<T>) EntityUtils.getEntityClass(this

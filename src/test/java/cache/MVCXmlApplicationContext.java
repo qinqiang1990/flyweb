@@ -1,4 +1,4 @@
-package qq.security.dao.jpa;
+package cache;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -10,6 +10,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+import qq.security.dao.jpa.UserDao;
+import qq.security.dao.jpa.UserDaoImpl;
+
 public class MVCXmlApplicationContext {
 
 	public static Logger logger = Logger
@@ -20,7 +23,8 @@ public class MVCXmlApplicationContext {
 		ApplicationContext act = new ClassPathXmlApplicationContext(
 				"/applicationContext.xml");
 
-		UserDaoImpl userDaoImp = (UserDaoImpl) act.getBean("userDaoImpl");
-
+		UserDao userDao = (UserDao) act.getBean("userDaoImpl");
+		
+		System.out.print(userDao.find(1L).getLogin());
 	}
 }

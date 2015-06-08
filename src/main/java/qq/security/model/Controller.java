@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,6 +20,11 @@ import model.BaseModel;
 @Table(name = "controller")
 public class Controller extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -847913179109152972L;
+
 	private String url;
 
 	private Set<Role> roles = new HashSet<Role>();;
@@ -31,7 +37,7 @@ public class Controller extends BaseModel {
 		this.url = url;
 	}
 
-	@ManyToMany(mappedBy = "controllers")
+	@ManyToMany(mappedBy = "controllers", fetch = FetchType.EAGER)
 	public Set<Role> getRoles() {
 		return roles;
 	}

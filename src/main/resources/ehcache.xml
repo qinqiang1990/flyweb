@@ -35,14 +35,14 @@
 
 	<!-- acegi cache -->
 	<cache
-		name="userCache"
+		name="UserCache"
 		maxElementsInMemory="10000"
 		eternal="true"
 		overflowToDisk="true" />
 
 	<!-- acegi cache -->
 	<cache
-		name="resourceCache"
+		name="ControllerCache"
 		maxElementsInMemory="10000"
 		eternal="true"
 		overflowToDisk="true" />

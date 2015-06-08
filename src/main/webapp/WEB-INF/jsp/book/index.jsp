@@ -10,7 +10,7 @@
 </head>
 <body>
 	${message}
-	<%-- 
+
 	<sec:authentication property="name" />
 	<br />
 	<sec:authorize ifAllGranted="ROLE_ADD">
@@ -18,21 +18,14 @@
 		<br />
 	</sec:authorize>
 
-	<sec:authorize ifAllGranted="ROLE_UPDATE">
+	<sec:authorize ifAllGranted="ROLE_UPD">
 		<a href="/book/update">book/update</a>
 		<br />
-	</sec:authorize> 
-	--%>
+	</sec:authorize>
 
 
 
-	<sec:authentication property="name" />
-	<br />
-	<a href="/book/add">book/add</a>
-	<br />
 
-	<a href="/book/update">book/update</a>
-	<br />
 
 	<a href="/auth/logout">推出系统</a>
 </body>

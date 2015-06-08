@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import qq.security.dao.jpa.UserDao;
+import qq.security.model.Role;
+import qq.security.model.User;
+import qq.security.service.ControllerService;
 import qq.spring.model.Book;
 import qq.spring.service.BookService;
 
@@ -16,6 +20,8 @@ import qq.spring.service.BookService;
 public class BookController {
 	@Autowired
 	private BookService bookservice;
+	@Autowired
+	ControllerService controllerservice;
 
 	@RequestMapping(value = "/add")
 	public String add(Book book, Model model) {
@@ -34,6 +40,9 @@ public class BookController {
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public List<Book> list(Book book) {
+
+		controllerservice.find(1L);
+
 		return bookservice.list(book);
 	}
 

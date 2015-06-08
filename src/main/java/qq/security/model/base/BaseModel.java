@@ -1,5 +1,6 @@
 package qq.security.model.base;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ enum Deleted {
 }
 
 @MappedSuperclass
-public abstract class BaseModel {
+public abstract class BaseModel implements Serializable{
 
 	protected Long id;
 	private Date updateTime;

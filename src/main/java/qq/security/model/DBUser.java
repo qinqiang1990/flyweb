@@ -10,6 +10,10 @@ import model.BaseModel;
 
 public class DBUser  extends BaseModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5263709290889832177L;
 	private String username;
 	private String password;
 	private Integer access;

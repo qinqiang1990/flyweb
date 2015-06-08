@@ -6,7 +6,27 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	
+	<!-- OpenSessionInView -->
+	<!--
+		<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		</filter>
+
+		<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		</filter-mapping>
+	-->
+	<filter>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>openEntityManagerInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<!-- SpringSecurity必须的filter -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -38,14 +58,14 @@
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-	 
-	 
+
+
 
 	<!-- 上下文监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 
 
 	<!-- spring mvc -->
@@ -92,23 +112,11 @@
 	</listener>
 
 
-  	<!-- session超时定义,单位为分钟 -->
+	<!-- session超时定义,单位为分钟 -->
 	<session-config>
 		<session-timeout>30</session-timeout>
-	</session-config>  
-	
-	<!-- OpenSessionInView -->
-<!-- 
-	<filter>
-		<filter-name>OpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-	</filter>
+	</session-config>
 
-	<filter-mapping>
-		<filter-name>OpenSessionInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
- -->
 
 
 </web-app>
