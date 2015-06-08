@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import qq.security.dao.jpa.ControllerDao;
 import qq.security.model.Controller;
 import qq.security.model.Role;
+import qq.security.service.ControllerService;
 
 /* 
  *  
@@ -55,6 +56,9 @@ public class MethodSecurityMetadataSource implements
 
 	@Autowired
 	private ControllerDao controllerDao;
+
+	@Autowired
+	private ControllerService controllerService;
 
 	// According to a URL, Find out permission configuration of this URL.
 	public Collection<ConfigAttribute> getAttributes(Object object)
@@ -102,7 +106,9 @@ public class MethodSecurityMetadataSource implements
 	 */
 	@PostConstruct
 	public void init() throws Exception {
-		this.requestMap = this.bindRequestMap();
+
+		this.requestMap = controllerService.bindRequestMap();
+		// this.requestMap = this.bindRequestMap();
 		logger.info("init" + this.requestMap);
 	}
 

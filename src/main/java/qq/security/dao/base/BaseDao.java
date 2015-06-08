@@ -1,10 +1,6 @@
 package qq.security.dao.base;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 
 public interface BaseDao<T> {
 
