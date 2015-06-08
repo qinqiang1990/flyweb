@@ -58,10 +58,10 @@
 				<value>${dataSource.url}</value>
 			</property>
 			<property name="user">
-				<value>root</value>
+				<value>${dataSource.username}</value>
 			</property>
 			<property name="password">
-				<value>111111</value>
+				<value>${dataSource.password}</value>
 			</property>
 
 			<!-- 最大连接数 -->

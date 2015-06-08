@@ -43,3 +43,12 @@ http://sarin.iteye.com/blog/830831
 java spring 缓存
 
 自定义注解	自定义标签
+
+
+
+一些变动包括 DAO框架转用Spring Data JPA + Hibernate，
+MVC框架转用Spring MVC 3，
+Restful框架转用Spring MVC + Spring RestTemplate，
+CSS框架转用Twitter Bootstrap，
+安全框架转用Apache Shiro 等等，
+Selenium升级到WebDriver。 
