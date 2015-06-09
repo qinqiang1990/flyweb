@@ -152,17 +152,27 @@
 			</property>
 		</bean>
 
-		<!-- 事务管理器 -->
+		<!--  Jpa 事务管理器 -->
 		<bean
-			id="txManager"
+			id="transactionManager"
 			class="org.springframework.orm.jpa.JpaTransactionManager">
 			<property
 				name="entityManagerFactory"
 				ref="entityManagerFactory" />
 		</bean>
 
+
+		<!-- Spring Data Jpa配置 -->
+		<jpa:repositories
+			base-package="cn.tt100.dcw"
+			transaction-manager-ref="transactionManager"
+			entity-manager-factory-ref="entityManagerFactory" />
+   
+    
 		<!-- 注解式事务 -->
-		<tx:annotation-driven transaction-manager="txManager" />
+		<tx:annotation-driven
+			transaction-manager="transactionManager"
+			proxy-target-class="true" />
 		<!--
 			扫描myBatis映射文件
 			<bean

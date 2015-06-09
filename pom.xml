@@ -27,10 +27,17 @@
 		<ehcache.version>2.6.11</ehcache.version>
 		<mockito-all.version>2.0.2-beta</mockito-all.version>
 		<c3p0.version>0.9.5</c3p0.version>
-
+		<spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
 	</properties>
 
 	<dependencies>
+
+		<!-- spring data access -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.mchange</groupId>

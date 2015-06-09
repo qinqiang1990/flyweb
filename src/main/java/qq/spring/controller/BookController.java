@@ -2,15 +2,14 @@ package qq.spring.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import qq.security.dao.jpa.UserDao;
-import qq.security.model.Role;
-import qq.security.model.User;
+import qq.security.dao.sdjpa.v1.ControllerDaov1;
 import qq.security.service.ControllerService;
 import qq.spring.model.Book;
 import qq.spring.service.BookService;
@@ -18,6 +17,9 @@ import qq.spring.service.BookService;
 @Controller
 @RequestMapping(value = "/book")
 public class BookController {
+
+	protected static Logger logger = Logger.getLogger(BookController.class);
+
 	@Autowired
 	private BookService bookservice;
 	@Autowired
@@ -37,9 +39,16 @@ public class BookController {
 		return "book/update";
 	}
 
+	@Autowired
+	ControllerDaov1 controllerdao;
+
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public List<Book> list(Book book) {
+
+		// jpa v1 test
+		List<qq.security.model.Controller> list = controllerdao.findAll();
+		logger.info("controller count:" + list.size());
 
 		controllerservice.find(1L);
 

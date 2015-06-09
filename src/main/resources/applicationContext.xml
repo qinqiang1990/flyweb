@@ -137,9 +137,17 @@
 			<property
 				name="packagesToScan"
 				value="qq.security.model" />
+			<property
+				name="hibernate.connection.provider_class"
+				value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider" />
 			<property name="jpaProperties">
 				<props>
-					<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<!-- 	<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop> -->
+				<!-- 	
+						<prop key="hibernate.connection.provider_class">
+							org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+						</prop>
+ 				-->
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 					<prop key="hibernate.max_fetch_depth">3</prop>
 					<prop key="hibernate.jdbc.fetch_size">18</prop>
@@ -151,18 +159,30 @@
 				</props>
 			</property>
 		</bean>
-
-		<!-- 事务管理器 -->
+ 
+		<!--  Jpa 事务管理器 -->
 		<bean
-			id="txManager"
+			id="transactionManager"
 			class="org.springframework.orm.jpa.JpaTransactionManager">
 			<property
 				name="entityManagerFactory"
 				ref="entityManagerFactory" />
 		</bean>
 
+
+		<!-- Spring Data Jpa配置 -->
+		<jpa:repositories
+			base-package="qq.security.dao.sdjpa.v1"
+			transaction-manager-ref="transactionManager"
+			entity-manager-factory-ref="entityManagerFactory" />
+   
+    
 		<!-- 注解式事务 -->
-		<tx:annotation-driven transaction-manager="txManager" />
+		<tx:annotation-driven
+			transaction-manager="transactionManager"
+			proxy-target-class="true" />
+			
+			 
 		<!--
 			扫描myBatis映射文件
 			<bean

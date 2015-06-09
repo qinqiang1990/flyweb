@@ -16,6 +16,7 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.AntPathRequestMatcher;
 import org.springframework.security.web.util.RequestMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import qq.security.dao.jpa.ControllerDao;
 import qq.security.model.Controller;
@@ -32,6 +33,7 @@ public class ControllerService {
 		return controllerDao.find(entityId);
 	}
 
+	@Transactional
 	@Cacheable(value = "ControllerCache")
 	// 获取权限列表
 	public Map<RequestMatcher, Collection<ConfigAttribute>> bindRequestMap() {
