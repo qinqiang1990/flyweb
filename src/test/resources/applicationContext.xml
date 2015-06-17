@@ -18,6 +18,48 @@
 		http://www.springframework.org/schema/cache  
 		http://www.springframework.org/schema/cache/spring-cache-3.2.xsd"
 	default-lazy-init="true">
+	<!-- 
+	<bean
+		id="natureRepository"
+		class="com.orangeslate.naturestore.repository.NatureRepositoryImpl">
+		<property
+			name="mongoTemplate"
+			ref="mongoTemplate" />
+	</bean>
+
+	<bean
+		id="mongoTemplate"
+		class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg
+			name="mongo"
+			ref="mongo" />
+		<constructor-arg
+			name="databaseName"
+			value="nature" />
+	</bean>
+ 
+    Factory bean that creates the Mongo instance
+	<bean
+		id="mongo"
+		class="org.springframework.data.mongodb.core.MongoFactoryBean">
+		<property
+			name="host"
+			value="localhost" />
+		<property
+			name="port"
+			value="27017" />
+	</bean>
+ 
+    Activate annotation configured components
+	<context:annotation-config />
+ 
+    Scan components for annotations within the configured package
+	<context:component-scan base-package="com.orangeslate.naturestore">
+		<context:exclude-filter
+			type="annotation"
+			expression="org.springframework.context.annotation.Configuration" />
+	</context:component-scan>
+   -->
 
 	<beans>
 
