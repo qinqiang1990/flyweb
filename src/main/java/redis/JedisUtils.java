@@ -34,11 +34,10 @@ public class JedisUtils {
 
 		// System.out.println(jedis.lrange("lists", 0, -1));
 		// System.out.println(value);
-
-		setObject();
-		jedis.lpush("lists", "vector");
-		jedis.lpush("lists", "ArrayList");
-		jedis.lpush("lists", "LinkedList");
+		/*
+		 * setObject(); jedis.lpush("lists", "vector"); jedis.lpush("lists",
+		 * "ArrayList"); jedis.lpush("lists", "LinkedList");
+		 */
 		// jedis.expire(key, seconds)
 		Person person = getObject(100);
 		System.out.println(person.getId());
@@ -46,6 +45,8 @@ public class JedisUtils {
 		person = getObject(101);
 		System.out.println(person.getId());
 		System.out.println(person.getName());
+		System.out.println(jedis.get("foo"));
+
 	}
 
 	public static void setObject() {
