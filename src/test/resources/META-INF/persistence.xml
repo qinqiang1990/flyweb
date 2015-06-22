@@ -10,8 +10,10 @@
 		name="JPAPU"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>entity.otm.InventoryForm</class>
-		<class>entity.otm.InventoryRecord</class>
+		<class>entity.otm.two.InventoryForm</class>
+		<class>entity.otm.two.InventoryRecord</class>
+		<class>entity.otm.positive.Form</class>
+		<class>entity.otm.positive.Record</class>
 		<properties>
 			<property
 				name="hibernate.dialect"

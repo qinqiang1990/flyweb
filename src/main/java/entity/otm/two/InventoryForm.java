@@ -1,4 +1,4 @@
-package entity.otm;
+package entity.otm.two;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,11 +19,6 @@ import javax.persistence.Version;
 
 import entity.IdEntity;
 
-/**
- * 单据
- * @author Jack
- */
-@SuppressWarnings("all")
 @Entity
 @Table(name = "kc_forms")
 public class InventoryForm extends IdEntity {

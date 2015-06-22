@@ -1,4 +1,4 @@
-package entity.otm;
+package entity.otm.two;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,12 +9,6 @@ import javax.persistence.Table;
 
 import entity.IdEntity;
 
-/**
- * 单据 条目
- * 
- * @author Jack
- */
-@SuppressWarnings("all")
 @Entity
 @Table(name = "kc_forms_records")
 public class InventoryRecord extends IdEntity {
@@ -31,7 +25,7 @@ public class InventoryRecord extends IdEntity {
 
 	private InventoryForm form;
 
-	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH }, optional = true)
+	@ManyToOne(cascade = { CascadeType.ALL }, optional = true)
 	@JoinColumn(name = "form_id")
 	public InventoryForm getForm() {
 		return form;
