@@ -35,6 +35,21 @@
 
 	<dependencies>
 
+ 		<!-- 加密组件组件包 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.52</version>
+		</dependency>
+		
+		 <!-- 编码格式的转换，如Base64.二进制.十六进制.字符集和Url编码的转换 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+ 
+
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>

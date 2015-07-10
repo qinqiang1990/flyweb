@@ -1,0 +1,74 @@
+	<script type="text/javascript" src="${ctx}/resources/js/cryptico.min.js"></script>
+		<script type="text/javascript" src="${ctx}/resources/js/base64.js"></script>
+		<script type="text/javascript" src="${ctx}/resources/web/chat/js/jquery_form_min.js"></script>
+		
+
+ 
+	
+<script type="text/javascript">      
+//注册
+function forget(){
+	doucment.location.href="/forget.jsp";
+}
+</script> 
+<script type="text/javascript">
+function submit() {
+    $('#login-form').submit();
+}
+$(document).ready(function() {
+    var options = {
+        beforeSubmit:showRequest,
+        success:showResponse,
+        dataType:'json',
+        type:'post'
+    };
+    $('#login-form').submit(function(){
+           $(this).ajaxSubmit(options);
+           return false;
+    });
+    
+});
+/* var rsaKey = new RSAKey();
+console.log(b64tohex('${modulus}'));
+console.log(b64tohex('${exponent}'));
+rsaKey.setPublic(b64tohex('${modulus}'), b64tohex('${exponent}')); */
+function showRequest(formData, jqForm, options) {
+	/* $(formData).each(function(i, n) {
+		if(n.name == 'password'){
+	        n.value = hex2b64(rsaKey.encrypt(n.value.trim()));
+		}
+    }); */
+    return true;
+}
+function showResponse(rdata,statusText, xhr,$form) {
+    if (rdata.operateSuccess) {
+    	window.location.href=rdata.operateCallbackUrl;
+    }else{
+    	alert(rdata.operateMessage);
+    }
+}
+</script>
+
+
+http://www.blogjava.net/icewee/archive/2012/05/19/378570.html
+
+RSA加密明文最大长度117字节，解密要求密文最大长度为128字节，所以在加密和解密的过程中需要分块进行。
+RSA加密对明文的长度是有限制的，如果加密数据过大会抛出如
+
+
+
+ var MAX_ENCRYPT_BLOCK = 117;
+             
+            var data=JSON.stringify(info);
+             
+            var encryptdata="";
+            
+            var start=0;
+            for(var i=0;i<parseInt(data.length/MAX_ENCRYPT_BLOCK);i++)
+            {
+            	encryptdata+=rsaKey.encrypt(data.substring(i*MAX_ENCRYPT_BLOCK,(i+1)*MAX_ENCRYPT_BLOCK))
+            	start=(i+1)*MAX_ENCRYPT_BLOCK;
+            }
+          	
+            encryptdata+=rsaKey.encrypt(data.substring(start,data.length))
+            

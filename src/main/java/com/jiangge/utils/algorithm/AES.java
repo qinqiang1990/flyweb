@@ -102,8 +102,7 @@ public class AES {
 	 */
 	private static byte[] decrypt(byte[] content, String password) {
 		try{
-			KeyGenerator kgen = KeyGenerator.
-			getInstance("AES");
+			KeyGenerator kgen = KeyGenerator.getInstance("AES");
 			kgen.init(128,new SecureRandom(password.getBytes()));
 			SecretKey secretKey = kgen.generateKey();
 			byte[] enCodeFormat = secretKey.getEncoded();
