@@ -12,7 +12,6 @@ public class MDTest {
 
 		System.out.println(MD5Util.encodePassword("12345678"));
 		System.out.println(MD5.GetMD5Code("12345678"));
-		System.out.println(RSAUtil.decryptByPrivateKey("12345678"));
 
 	}
 
