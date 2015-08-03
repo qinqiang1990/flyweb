@@ -42,6 +42,7 @@ public class Publisher {
 		while (!text.equals("quit")) {
 			// Create a messages
 			TextMessage message = session.createTextMessage(text);
+	 
 			// Tell the producer to send the message
 			producer.send(message);
 
