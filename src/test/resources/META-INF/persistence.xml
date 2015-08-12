@@ -14,6 +14,7 @@
 		<class>entity.otm.two.InventoryRecord</class>
 		<class>entity.otm.positive.Form</class>
 		<class>entity.otm.positive.Record</class>
+		<class>model.Subject</class> 
 		<properties>
 			<property
 				name="hibernate.dialect"

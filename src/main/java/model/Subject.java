@@ -18,7 +18,7 @@ public class Subject extends BaseModel {
 
 	private String commit;
 
-	@Column(length = 2000)
+	@Column(length = 2000,nullable=false)
 	public String getName() {
 		return name;
 	}
