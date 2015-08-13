@@ -2,6 +2,7 @@ package qq.security.dao.hib;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +30,9 @@ public class SubjectDao extends SuperDao {
 		log.info("saving subject instance");
 		try {
 			Session session = getSession();
-			session.beginTransaction();
+			Transaction t=session.beginTransaction();
 			session.save(subject);
-			session.getTransaction().commit();
+			t.commit();
 
 			log.info("save successful");
 		} catch (RuntimeException e) {

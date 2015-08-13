@@ -8,7 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,6 +37,9 @@ public class HibService {
 
 	private static final Logger log = Logger.getLogger(HibService.class);
 
+	@Resource
+	SessionFactory sessionFactory;
+
 	@Autowired
 	SubjectDao sdao;
 
@@ -46,8 +54,18 @@ public class HibService {
 	}
 
 	public void save2(Master master, Subject subject) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Transaction t=session.getTransaction();
+		System.out.print("isActive():"+t.isActive());
+		t.begin();
+		System.out.print("isActive():"+t.isActive());
+
 		mdao.save2(master);
 		sdao.save2(subject);
+
+		t.commit();
 
 	}
 

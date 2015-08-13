@@ -2,6 +2,7 @@ package qq.security.dao.hib;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ public class MasterDao extends SuperDao {
 
 	private static final Logger log = Logger.getLogger(MasterDao.class);
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void save(Master master) {
 		log.info("saving master instance");
 		try {
@@ -41,9 +42,9 @@ public class MasterDao extends SuperDao {
 		log.info("saving master instance");
 		try {
 			Session session = getSession();
-			session.beginTransaction();
+			Transaction t=session.beginTransaction();
 			session.save(master);
-			session.getTransaction().commit();
+			t.commit();
 
 			log.info("save successful");
 		} catch (RuntimeException e) {
