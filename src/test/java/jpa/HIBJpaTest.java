@@ -15,29 +15,30 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import qq.security.dao.sdjpa.v1.ControllerDaov1;
-import qq.security.model.User;
-import static org.mockito.Mockito.*;
+import qq.security.dao.hib.MasterDao;
+import qq.security.dao.hib.SubjectDao;
+import qq.security.model.Master;
+import qq.security.model.Subject;
+import qq.security.service.HibService;
 
-@Transactional
 @PropertySource("classpath:application.properties")
 @ContextConfiguration(locations = { "classpath:applicationHBContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class HIBJpaTest {
 
 	@Autowired
-	ControllerDaov1 dao;
-
+	HibService serivce;
 	@Autowired
-	CacheManager cacheManager;
-
-	@Before
-	public void before() {
-		cacheManager.clearAll();
-	}
+	MasterDao mdao;
 
 	@Test
 	public void testSpringMVC() {
+
+		Master master = new Master();
+
+		Subject subject = new Subject();
+		
+		serivce.save(master, subject);
 
 		/*
 		 * User user = dao.findByAccountId(id).find(1L);
