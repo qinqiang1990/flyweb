@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>calender</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/clean.css">
+</head>
+
+<body>
+    <input type="text" id="inputDate">
+    <script src="js/jquery.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script>
+    $(document).ready(function(argument) {
+
+        $('#inputDate').DatePicker({
+            mode: 'single',
+            onBeforeShow: function(el) {
+                if ($('#inputDate').val()) {
+                    $('#inputDate').DatePickerSetDate($('#inputDate').val(), true);
+                }
+            },
+            onChange: function(date, el) {
+                $(el).val(timeTool.formatTime(date));
+                $(el).DatePickerHide();
+            }
+        });
+
+        var timeTool = {
+            formatTime: function(date, split) {
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                var d = date.getDate();
+                split = split || '/'
+                return [y, this.fillZero(m), this.fillZero(d)].join(split);
+            },
+            fillZero: function(num) {
+                num = parseInt(num, 10);
+                return num < 10 ? '0' + num : num;
+            }
+        };
+    })
+    </script>
+</body>
+
+</html>
